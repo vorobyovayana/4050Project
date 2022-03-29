@@ -1,4 +1,5 @@
-﻿using System;
+﻿using FinaiProejct_200OK.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -20,9 +21,18 @@ namespace FinaiProejct_200OK
     /// </summary>
     public partial class MainWindow : Window
     {
+        DataGrid movieGrid;
         public MainWindow()
         {
             InitializeComponent();
+
+            movieGrid = MovieDataGrid;
+
+            User newUser = new User();
+            MessageBox.Show(newUser.getPassword());
+            newUser.setPassword("3345677");
+            MessageBox.Show(newUser.getPassword());
+            
         }
     }
 }

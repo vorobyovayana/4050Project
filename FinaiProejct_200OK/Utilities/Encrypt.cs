@@ -5,6 +5,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using System.IO;
+using System.Windows;
 
 namespace FinaiProejct_200OK.Utilities
 {
@@ -12,6 +13,8 @@ namespace FinaiProejct_200OK.Utilities
     {
         public static string EncryptPassword(string key, string password)
         {
+            if (password == null)
+                return null;
             byte[] IV = new byte[16];
             byte[] array;
 
@@ -38,11 +41,17 @@ namespace FinaiProejct_200OK.Utilities
 
             }
 
+            
+
             return Convert.ToBase64String(array);
         }
 
         public static string DecryptPassword(string key, string cipherPassword)
         {
+            if (cipherPassword == null)
+            {
+                return null;
+            }
             byte[] IV = new byte[16];
             byte[] buffer = Convert.FromBase64String(cipherPassword);
 
