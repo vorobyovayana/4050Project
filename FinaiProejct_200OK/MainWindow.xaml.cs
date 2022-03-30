@@ -1,4 +1,5 @@
 ﻿using FinaiProejct_200OK.Entities;
+using FinaiProejct_200OK.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -22,14 +23,38 @@ namespace FinaiProejct_200OK
     public partial class MainWindow : Window
     {
         DataGrid movieGrid;
+        List<Movie> movies;
         public MainWindow()
         {
             InitializeComponent();
 
             movieGrid = MovieDataGrid;
+            
+
+            string moviePath = @"..\..\Data\movies.csv";
+            string content = FileService.ReadFile(moviePath);            
+
+            movies = MovieParser.parseRoaster(content);
+
+             
+
+            PopulateMovieData();
+
+
 
             
             
+
+            
+            
+        }
+
+        private void PopulateMovieData()
+        {
+            movieGrid.SelectionMode = DataGridSelectionMode.Single;
+            movieGrid.IsReadOnly = true;
+
+            movieGrid.ItemsSource = movies;
         }
     }
 }
