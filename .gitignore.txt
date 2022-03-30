@@ -1,6 +1,6 @@
-packages/
-FinalProject_200OK/bin/
-FinalProject_200OK/obj/
+packages/*
+FinalProject_200OK/bin/*
+FinalProject_200OK/obj/*
 *.log
 *.cache
 *.Iref
