@@ -28,10 +28,7 @@ namespace FinaiProejct_200OK
 
             movieGrid = MovieDataGrid;
 
-            User newUser = new User();
-            MessageBox.Show(newUser.getPassword());
-            newUser.setPassword("3345677");
-            MessageBox.Show(newUser.getPassword());
+            
             
         }
     }
