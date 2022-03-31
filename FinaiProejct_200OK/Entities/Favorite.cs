@@ -15,5 +15,12 @@ namespace FinaiProejct_200OK.Entities
         [Key]
         [Required]
         public int MovieId { get; set; }
+
+        public Favorite(int memberId, int movieId)
+        {
+            MemberId = memberId;
+            MovieId = movieId;
+        }
+        public Favorite() { }
     }
 }

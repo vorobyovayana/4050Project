@@ -187,6 +187,8 @@
     <Compile Include="Utilities\Encrypt.cs" />
     <Compile Include="Utilities\FileService.cs" />
     <Compile Include="Utilities\MovieContext.cs" />
+    <Compile Include="Utilities\FavoriteCSVParser.cs" />
+    <Compile Include="Utilities\ReviewCSVParser.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>

@@ -13,5 +13,13 @@ namespace FinaiProejct_200OK.Entities
         public int ReviewId { get; set; }
         public int MovieId { get; set; }
         public string ReviewDesc { get; set; }
+
+        public Review(int reviewId, int movieId, string reviewDesc)
+        {
+            ReviewId = reviewId;
+            MovieId = movieId;
+            ReviewDesc = reviewDesc;
+        }
+        public Review() { }
     }
 }
