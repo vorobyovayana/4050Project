@@ -12,7 +12,7 @@ namespace FinaiProejct_200OK.Utilities
     {
         static StreamReader sr;
 
-        public static string ReadFile(string fileName)
+        public string ReadFile(string fileName)
         {
             string fileContent = "";
 

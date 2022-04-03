@@ -8,11 +8,15 @@
         Title="MainWindow" Height="450" Width="800">
     <Grid>
         <DataGrid Name="MovieDataGrid" HorizontalAlignment="Left" Height="220" Margin="212,112,0,0" VerticalAlignment="Top" Width="362"/>
-        <ListBox Name="GenreListBox" HorizontalAlignment="Left" Height="139" Margin="630,124,0,0" VerticalAlignment="Top" Width="111" RenderTransformOrigin="-0.4,0.236"/>
-        <ListBox Name="DirectorListBox" HorizontalAlignment="Left" Height="139" Margin="48,124,0,0" VerticalAlignment="Top" Width="97"/>
+        <ListBox Name="GenreListBox" HorizontalAlignment="Left" Height="179" Margin="620,124,0,0" VerticalAlignment="Top" Width="132" RenderTransformOrigin="-0.4,0.236"/>
+        <ListBox Name="DirectorListBox" HorizontalAlignment="Left" Height="179" Margin="48,124,0,0" VerticalAlignment="Top" Width="115"/>
         <TextBox Name="SearchTextBox" HorizontalAlignment="Left" Height="20" Margin="259,31,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
         <Button Name="LoginButton" Content="LogIn" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="FavoritesButton" Content="Go to Favorites" HorizontalAlignment="Left" Margin="656,362,0,0" VerticalAlignment="Top" Width="75"/>
+        <Label Content ="Directors" HorizontalAlignment="Left" Margin="72,83,0,0" VerticalAlignment="Top"/>
+        <Label Content="Genres" HorizontalAlignment="Left" Margin="656,91,0,0" VerticalAlignment="Top"/>
+        <Button Name ="AddDirectorBtn" Content="Populate Directors" HorizontalAlignment="Left" Margin="65,32,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="AddGenresBtn" Content="Populate Genres" HorizontalAlignment="Left" Margin="65,64,0,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>
