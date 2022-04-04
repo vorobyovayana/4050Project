@@ -136,7 +136,8 @@ namespace FinaiProejct_200OK
             using (var ctx = new MovieContext())
             {
                 var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).First();
-                if (loginPage.PasswordTextBox.Text == user.getPassword())
+              
+                if (loginPage.PasswordTextBox.Text == user.getPassword().Trim())
                 {
                     myUser = user;
                     LogoutButton.Visibility = Visibility.Visible;
@@ -145,6 +146,9 @@ namespace FinaiProejct_200OK
                     loginPage.UserNameTextBox.Text = "";
                     loginPage.PasswordTextBox.Text = "";
                     loginPage.Hide();
+                    CreateButton.Visibility = Visibility.Hidden;
+                    AccountTextBlock.Text = "Hello, " + myUser.UserName;
+                    AccountTextBlock.Visibility = Visibility.Visible;
                 }
                 else
                 {
@@ -160,6 +164,9 @@ namespace FinaiProejct_200OK
             myUser = null;
             LogoutButton.Visibility = Visibility.Hidden;
             LoginButton.Visibility = Visibility.Visible;
+            CreateButton.Visibility = Visibility.Visible;
+            AccountTextBlock.Text = "";
+            AccountTextBlock.Visibility = Visibility.Hidden;
             
         }
 
