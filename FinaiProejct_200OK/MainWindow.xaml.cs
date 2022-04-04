@@ -27,7 +27,8 @@ namespace FinaiProejct_200OK
 
         private User myUser;
         Login loginPage;
-        System.Windows.Controls.Button subLogInButton;
+        Button subLogInButton;
+        CreateAccount createPage;
 
         DataGrid movieGrid;
         List<Director> directors = new List<Director>();
@@ -43,6 +44,7 @@ namespace FinaiProejct_200OK
             myUser = null;
             loginPage = new Login();
             subLogInButton = loginPage.SubLoginButton;
+            createPage = new CreateAccount();
 
             InitializeDirectorsListBox();
             InitializeGenresListBox();
@@ -155,6 +157,30 @@ namespace FinaiProejct_200OK
             LogoutButton.Visibility = Visibility.Hidden;
             LoginButton.Visibility = Visibility.Visible;
             
+        }
+
+        private void CreateButtonClick(Object o, EventArgs e)
+        {
+            if (createPage.CreateUserNameTextBox.Text.Length == 0 || createPage.CreatePasswordTextBox.Text.Length == 0)
+            {
+                createPage.CreateHintTextBlock.Text = "Please input both user name and password";
+            }
+            using (var ctx = new MovieContext())
+            {
+                var count = ctx.User.Where(x => x.UserName == createPage.CreateUserNameTextBox.Text).Count();
+                if (count == 0)
+                {
+                    User newUser = new User();
+                    newUser.UserName = createPage.CreateUserNameTextBox.Text;
+                    newUser.setPassword(createPage.CreatePasswordTextBox.Text);
+                    ctx.SaveChanges();
+                    createPage.Hide();
+
+                } else
+                {
+                    createPage.CreateHintTextBlock.Text = "The user name is used. Please input another one!";
+                }
+            }
         }
 
         

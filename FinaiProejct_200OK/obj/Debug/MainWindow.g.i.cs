@@ -112,6 +112,22 @@ namespace FinaiProejct_200OK {
         #line default
         #line hidden
         
+        
+        #line 21 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.Button CreateButton;
+        
+        #line default
+        #line hidden
+        
+        
+        #line 22 "..\..\MainWindow.xaml"
+        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
+        internal System.Windows.Controls.TextBlock AccountTextBlock;
+        
+        #line default
+        #line hidden
+        
         private bool _contentLoaded;
         
         /// <summary>
@@ -168,6 +184,12 @@ namespace FinaiProejct_200OK {
             return;
             case 9:
             this.AddGenresBtn = ((System.Windows.Controls.Button)(target));
+            return;
+            case 10:
+            this.CreateButton = ((System.Windows.Controls.Button)(target));
+            return;
+            case 11:
+            this.AccountTextBlock = ((System.Windows.Controls.TextBlock)(target));
             return;
             }
             this._contentLoaded = true;
