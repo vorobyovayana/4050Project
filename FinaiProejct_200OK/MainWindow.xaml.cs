@@ -48,6 +48,7 @@ namespace FinaiProejct_200OK
             loginPage = new Login();
             subLogInButton = loginPage.SubLoginButton;
             createPage = new CreateAccount();
+            ReadTheUser();
 
             InitializeDirectorsListBox();
             InitializeGenresListBox();
@@ -140,19 +141,16 @@ namespace FinaiProejct_200OK
                     myUser = user;
                     LogoutButton.Visibility = Visibility.Visible;
                     LoginButton.Visibility = Visibility.Hidden;
-                    loginPage.Close();
+                    loginPage.HintTextBlock.Text = "";
+                    loginPage.UserNameTextBox.Text = "";
+                    loginPage.PasswordTextBox.Text = "";
+                    loginPage.Hide();
                 }
                 else
                 {
                     loginPage.HintTextBlock.Visibility = Visibility.Visible;
                     loginPage.HintTextBlock.Text = "Wrong input information";
-                }
-                LogoutButton.Visibility = Visibility.Visible;
-                LoginButton.Visibility = Visibility.Hidden;
-                loginPage.HintTextBlock.Text = "";
-                loginPage.UserNameTextBox.Text = "";
-                loginPage.PasswordTextBox.Text = "";
-                loginPage.Hide();
+                }                
             }
         }
 
@@ -210,6 +208,24 @@ namespace FinaiProejct_200OK
             {
                 MovieDataGrid.Items.Add(m);
                 
+            }
+        }
+
+        private void ReadTheUser()
+        {
+            using (var ctx = new MovieContext())
+            {
+                var count = ctx.User.Count();
+                if (count == 0)
+                {
+                    List<User> usersList = new List<User>();
+                    usersList = UserParser.ParseUser(fs.ReadFile(@"..\\..\\Data\\user.csv"));
+                    foreach (User theUser in usersList)
+                    {
+                        ctx.User.Add(theUser);
+                    }
+                    ctx.SaveChanges();
+                }
             }
         }
 
