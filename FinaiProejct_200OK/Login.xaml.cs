@@ -33,21 +33,6 @@ namespace FinaiProejct_200OK
 
         }
 
-        private void LoginClick(Object o, EventArgs e)
-        {
-            using (var ctx = new MovieContext())
-            {
-                var user = ctx.User.Where(x => x.UserName == UserNameTextBox.Text).First();
-                if (PasswordTextBox.Text == user.getPassword())
-                {
-                    
-                    this.Close();
-                } else
-                {
-                    HintTextBlock.Visibility = Visibility.Visible;
-                    HintTextBlock.Text = "Wrong input information";
-                }
-            }
-        }
+        
     }
 }
