@@ -12,7 +12,7 @@ namespace FinaiProejct_200OK.Utilities
     {
         public DbSet<Movie> Movie { get; set; }
         public DbSet<User> User { get; set; }
-        public DbSet<GenreParser> Genre { get; set; }
+        public DbSet<Genre> Genre { get; set; }
         public DbSet<Favorite> Favorite { get; set; }
         public DbSet<Director> Director { get; set; }
         public DbSet<Detail> Detail { get; set; }

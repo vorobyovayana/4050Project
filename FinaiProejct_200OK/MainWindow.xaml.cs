@@ -29,7 +29,8 @@ namespace FinaiProejct_200OK
 
         private User myUser;
         Login loginPage;
-        System.Windows.Controls.Button subLogInButton;
+        Button subLogInButton;
+        CreateAccount createPage;
 
         DataGrid movieGrid;
         List<Director> directors = new List<Director>();
@@ -48,6 +49,7 @@ namespace FinaiProejct_200OK
             myUser = null;
             loginPage = new Login();
             subLogInButton = loginPage.SubLoginButton;
+            createPage = new CreateAccount();
 
             InitializeDirectorsListBox();
             InitializeGenresListBox();
@@ -66,8 +68,11 @@ namespace FinaiProejct_200OK
                 LoginButton.Click += LoginButtonClick;
                 subLogInButton.Click += SubLoginButtonClick;
                 LogoutButton.Click += LogOutButtonClick;
-                AddGenresBtn.Click += selectGenreFile;
-                AddDirectorBtn.Click += selectDirectorFile;
+                //CreateButton.Click += CreateButtonClick;
+                //createPage.SubCreateButton.Click += SubCreateButtonClick;
+                
+                AddGenreBtn.Click += selectGenreFile;
+                AddDirectorsBtn.Click += selectDirectorFile;
 
             }
         }
@@ -79,7 +84,7 @@ namespace FinaiProejct_200OK
 
         private void selectDirectorFile(object o, EventArgs e)
         {
-            if (o.Equals(AddDirectorBtn))
+            if (o.Equals(AddDirectorsBtn))
             {
                 OpenFileDialog openFileDialogue = new OpenFileDialog();
                 // Only show user the Data folder with only "directors.csv" file in it
@@ -107,7 +112,7 @@ namespace FinaiProejct_200OK
 
         private void selectGenreFile(object o, EventArgs e)
         {
-            if (o.Equals(AddGenresBtn))
+            if (o.Equals(AddGenreBtn))
             {
                 OpenFileDialog openFileDialogue = new OpenFileDialog();
                 // Only show user the Data folder with only "directors.csv" file in it

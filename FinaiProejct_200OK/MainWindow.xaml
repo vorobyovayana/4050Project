@@ -14,11 +14,14 @@
         <Button Name="LoginButton" Content="LogIn" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="LogoutButton" Content="LogOut" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
         <Button Name="FavoritesButton" Content="Go to Favorites" HorizontalAlignment="Left" Margin="656,362,0,0" VerticalAlignment="Top" Width="75"/>
-        <Label Content ="Directors" HorizontalAlignment="Left" Margin="82,314,0,0" VerticalAlignment="Top"/>
-        <Label Content="Genres" HorizontalAlignment="Left" Margin="656,314,0,0" VerticalAlignment="Top"/>
-        <Button Name ="AddDirectorBtn" Content="Populate Directors" HorizontalAlignment="Left" Margin="48,29,0,0" VerticalAlignment="Top" Width="106" Height="22"/>
-        <Button Name="AddGenresBtn" Content="Populate Genres" HorizontalAlignment="Left" Margin="48,56,0,0" VerticalAlignment="Top" Width="106" Height="22"/>
-      
+        <Label Content ="Directors" HorizontalAlignment="Left" Margin="72,83,0,0" VerticalAlignment="Top"/>
+        <Label Content="Genres" HorizontalAlignment="Left" Margin="656,91,0,0" VerticalAlignment="Top"/>
+        <Button Name ="AddDirectorsBtn" Content="Populate Directors" HorizontalAlignment="Left" Margin="65,32,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="AddGenreBtn" Content="Populate Genres" HorizontalAlignment="Left" Margin="65,64,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="CreateButton" HorizontalAlignment="Left" Content="Create Account" Margin="656,17,0,0" VerticalAlignment="Top" Width="87" />
+        <TextBlock x:Name="AccountTextBlock" TextWrapping="Wrap" Visibility="Hidden"/>
+
+
 
     </Grid>
 </Window>

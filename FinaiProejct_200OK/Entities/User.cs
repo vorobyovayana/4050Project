@@ -15,7 +15,13 @@ namespace FinaiProejct_200OK.Entities
         private string password;
         [Key]
         public int UserId { get; set; }
-        public string UserName { get; set; }        
+        public string UserName { get; set; }
+        public string Password { get {
+                return Encrypt.DecryptPassword(key, password);
+            } set
+            {
+                
+            } }
 
         public List<Favorite> Favorites { get; set; }
         public List<Review> Reviews { get; set; }
@@ -26,17 +32,13 @@ namespace FinaiProejct_200OK.Entities
         {
             
         }
-
-        public User(string nUserName, string nPassword)
-        {
-            this.UserName = nUserName;
-            this.password = nPassword;
-        }
+        
 
         public void setPassword(string nPassword)
         {
             this.password = Encrypt.EncryptPassword(key, nPassword);
-            MessageBox.Show(password);
+            this.Password = password;
+            
         }
 
         public string getPassword()
