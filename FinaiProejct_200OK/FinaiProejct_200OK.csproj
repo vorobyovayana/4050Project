@@ -175,6 +175,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="Entities\Review.cs" />
+    <Compile Include="Review.xaml.cs">
+      <DependentUpon>Review.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Favorite.xaml.cs">
+      <DependentUpon>Favorite.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
@@ -189,11 +195,20 @@
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
     <Compile Include="Utilities\DirectorParser.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
+    <Compile Include="Utilities\MovieCSVParser.cs" />
     <Compile Include="Utilities\FileService.cs" />
     <Compile Include="Utilities\GenreParser.cs" />
     <Compile Include="Utilities\MovieContext.cs" />
     <Compile Include="Utilities\FavoriteCSVParser.cs" />
     <Compile Include="Utilities\ReviewCSVParser.cs" />
+    <Page Include="Review.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Favorite.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="Login.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

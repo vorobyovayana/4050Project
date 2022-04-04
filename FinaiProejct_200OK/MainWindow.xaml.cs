@@ -9,6 +9,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
+using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -32,10 +33,11 @@ namespace FinaiProejct_200OK
         DataGrid movieGrid;
         List<Director> directors = new List<Director>();
         List<Genre> genres = new List<Genre>();
-
+        List<Movie> movies = new List<Movie>();
         FileService fs = new FileService();
         DirectorParser dp = new DirectorParser();
         GenreParser gp = new GenreParser();
+        MovieCSVParser mp = new MovieCSVParser();
 
         public MainWindow()
         {
@@ -46,18 +48,33 @@ namespace FinaiProejct_200OK
 
             InitializeDirectorsListBox();
             InitializeGenresListBox();
+            InitializeMovieDataGrid();
             movieGrid = MovieDataGrid;
-
             toggleEvent(true);
 
             
             
         }
+        private void InitializeMovieDataGrid()
+        {
+            MovieDataGrid.IsReadOnly = true;
+            MovieDataGrid.ItemsSource = movies;
+            DataGridTextColumn TitleColumn = new DataGridTextColumn();
+            TitleColumn.Header = "Movie Title";
+            TitleColumn.Binding = new Binding("MovieTitle");
 
+            DataGridTextColumn ReleaseDateCol = new DataGridTextColumn();
+            ReleaseDateCol.Header = "Release Date";
+            ReleaseDateCol.Binding = new Binding("ReleaseDate");
+
+            MovieDataGrid.Columns.Add(TitleColumn);
+            MovieDataGrid.Columns.Add(ReleaseDateCol);
+        }
         private void toggleEvent(bool toggle)
         {
             if (toggle)
             {
+                fileDialogueButton.Click += selectFile;
                 LoginButton.Click += LoginButtonClick;
                 subLogInButton.Click += SubLoginButtonClick;
                 LogoutButton.Click += LogOutButtonClick;
@@ -65,6 +82,35 @@ namespace FinaiProejct_200OK
             }
         }
 
+        private void selectFile(object o, EventArgs e)
+        {
+            OpenFileDialog openFileDialogue = new OpenFileDialog();
+            openFileDialogue.InitialDirectory = "c:\\temp";
+            openFileDialogue.Filter = "CSV Files (*.csv)|*.csv|PSV Files(*.psv)|*.psv";
+            openFileDialogue.RestoreDirectory = true;
+
+            Nullable<bool> result = openFileDialogue.ShowDialog();
+            var fileName = "";
+
+            if (result == true)
+            {
+                //As soon as there is a result from showdialogue assign it to the the fileName 
+                fileName = openFileDialogue.FileName;
+            }
+
+
+            //Listfrom file
+            movies = mp.parseRoster(fs.ReadFile(fileName));
+            //Read the fileContents in from the parser
+
+            allCourseList.AddRange(loadCourseList);
+            initializeCourseList();
+            initializeDataGrid();
+            initializeRoomListBox();
+            initializeDepartmentListBox();
+            userMessageBox.Text = "Added " + loadCourseList.Count() + " courses to the list.";
+
+        }
         private void LoginButtonClick(Object o, EventArgs e)
         {            
             loginPage.Show();

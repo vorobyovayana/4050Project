@@ -18,6 +18,8 @@
         <Label Content="Genres" HorizontalAlignment="Left" Margin="656,91,0,0" VerticalAlignment="Top"/>
         <Button Name ="AddDirectorBtn" Content="Populate Directors" HorizontalAlignment="Left" Margin="65,32,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="AddGenresBtn" Content="Populate Genres" HorizontalAlignment="Left" Margin="65,64,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button x:Name="fileDialogueButton" Content="Add Movie from CSV" HorizontalAlignment="Left" Margin="289,332,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Content="Button" HorizontalAlignment="Left" Margin="934,382,-217,0" VerticalAlignment="Top" Width="75"/>
 
     </Grid>
 </Window>

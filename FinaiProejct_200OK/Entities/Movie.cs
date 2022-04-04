@@ -19,5 +19,12 @@ namespace FinaiProejct_200OK.Entities
         public virtual List<Genre> Genres { get; set; }
         public virtual Detail MovieDetail { get; set; }
         public virtual Director MovieDirector { get; set; }
+
+        public Movie(int movieId, string movieTitle, DateTime releaseDate)
+        {
+            MovieId = movieId;
+            MovieTitle = movieTitle;
+            ReleaseDate = releaseDate;
+        }
     }
 }
