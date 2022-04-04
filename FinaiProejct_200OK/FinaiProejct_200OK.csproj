@@ -194,6 +194,8 @@
       <DependentUpon>20220404200116_add_Password_To_Database.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
+    <Compile Include="Utilities\MovieParser.cs" />
+    <Compile Include="Utilities\UserParser.cs" />
     <Compile Include="Utilities\DirectorParser.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
     <Compile Include="Utilities\FileService.cs" />
@@ -251,6 +253,7 @@
     <None Include="Data\directors.csv" />
     <None Include="Data\genres.csv" />
     <None Include="Data\movies.csv" />
+    <None Include="Data\user.csv" />
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
