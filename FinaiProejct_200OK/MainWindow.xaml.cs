@@ -33,6 +33,7 @@ namespace FinaiProejct_200OK
         DataGrid movieGrid;
         List<Director> directors = new List<Director>();
         List<Genre> genres = new List<Genre>();
+        List<Movie> movies;
 
         FileService fs = new FileService();
         DirectorParser dp = new DirectorParser();
@@ -40,7 +41,9 @@ namespace FinaiProejct_200OK
 
         public MainWindow()
         {
+            
             InitializeComponent();
+            movies = new List<Movie>();
             myUser = null;
             loginPage = new Login();
             subLogInButton = loginPage.SubLoginButton;
@@ -48,6 +51,7 @@ namespace FinaiProejct_200OK
 
             InitializeDirectorsListBox();
             InitializeGenresListBox();
+            PopulateMovie();
             movieGrid = MovieDataGrid;
 
             toggleEvent(true);
@@ -130,7 +134,7 @@ namespace FinaiProejct_200OK
         {
             using (var ctx = new MovieContext())
             {
-                /*var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).First();
+                var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).First();
                 if (loginPage.PasswordTextBox.Text == user.getPassword())
                 {
                     myUser = user;
@@ -142,7 +146,7 @@ namespace FinaiProejct_200OK
                 {
                     loginPage.HintTextBlock.Visibility = Visibility.Visible;
                     loginPage.HintTextBlock.Text = "Wrong input information";
-                }*/
+                }
                 LogoutButton.Visibility = Visibility.Visible;
                 LoginButton.Visibility = Visibility.Hidden;
                 loginPage.HintTextBlock.Text = "";
@@ -194,6 +198,19 @@ namespace FinaiProejct_200OK
                 }
             }
             
+        }
+
+        private void PopulateMovie()
+        {
+            MovieDataGrid.Items.Clear();
+            movies = MovieParser.ParseMovie(fs.ReadFile(@"..\\..\\Data\\movies.csv"));
+            
+
+            foreach (Movie m in movies)
+            {
+                MovieDataGrid.Items.Add(m);
+                
+            }
         }
 
         

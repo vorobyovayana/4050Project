@@ -26,7 +26,7 @@ namespace FinaiProejct_200OK.Utilities
                 //MessageBox.Show(fields.Length.ToString());
                 if (fields.Length != 2)
                 {
-                    MessageBox.Show("Problem parsing file, check format");
+                    System.Windows.MessageBox.Show("Problem parsing file, check format");
                     continue;
                 }
                 else
