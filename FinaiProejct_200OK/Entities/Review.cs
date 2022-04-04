@@ -7,20 +7,19 @@ using System.Threading.Tasks;
 
 namespace FinaiProejct_200OK.Entities
 {
-    class Favorite
+    class Review
     {
         [Key]
-        [Required]
-        public int MemberId { get; set; }
-        [Key]
-        [Required]
+        public int ReviewId { get; set; }
         public int MovieId { get; set; }
+        public string ReviewDesc { get; set; }
 
-        public Favorite(int memberId, int movieId)
+        public Review(int reviewId, int movieId, string reviewDesc)
         {
-            MemberId = memberId;
+            ReviewId = reviewId;
             MovieId = movieId;
+            ReviewDesc = reviewDesc;
         }
-        public Favorite() { }
+        public Review() { }
     }
 }

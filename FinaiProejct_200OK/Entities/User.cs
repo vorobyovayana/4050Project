@@ -1,6 +1,7 @@
 ﻿using FinaiProejct_200OK.Utilities;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -12,10 +13,12 @@ namespace FinaiProejct_200OK.Entities
     class User
     {
         private string password;
+        [Key]
         public int UserId { get; set; }
         public string UserName { get; set; }        
 
         public List<Favorite> Favorites { get; set; }
+        public List<Review> Reviews { get; set; }
 
         private string key = "b14ca5898a4e4133bbce2ea2315a1916";
 
