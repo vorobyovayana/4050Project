@@ -9,7 +9,6 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
 using System.Windows.Documents;
-using System.Windows.Forms;
 using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
@@ -45,6 +44,10 @@ namespace FinaiProejct_200OK
             loginPage = new Login();
             subLogInButton = loginPage.SubLoginButton;
 
+            InitializeDirectorsListBox();
+            InitializeGenresListBox();
+            movieGrid = MovieDataGrid;
+
             toggleEvent(true);
 
             
@@ -66,10 +69,8 @@ namespace FinaiProejct_200OK
         {            
             loginPage.Show();
         }
-            InitializeDirectorsListBox();
-            InitializeGenresListBox();
-            movieGrid = MovieDataGrid;
-        }
+            
+        
 
         public void InitializeDirectorsListBox()
         {
@@ -101,6 +102,25 @@ namespace FinaiProejct_200OK
             GenreListBox.Items.Clear();
             List<Genre> loadGenresList = GenreParser.ParseGenre(fs.ReadFile(@"..\\..\\Data\\genres.csv"));
             //Read the fileContents in from the parser
+            genres.AddRange(loadGenresList);
+
+            var genresList = genres.Select(x => x.GenreName).Distinct();
+
+            foreach (var c in genresList)
+            {
+                try
+                {
+                    ListViewItem l = new ListViewItem();
+                    l.Content = c;
+                    GenreListBox.Items.Add(l);
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show(e.Message);
+                }
+
+            }
+        }
 
         private void SubLoginButtonClick(Object o, EventArgs e)
         {
@@ -134,24 +154,7 @@ namespace FinaiProejct_200OK
             myUser = null;
             LogoutButton.Visibility = Visibility.Hidden;
             LoginButton.Visibility = Visibility.Visible;
-            genres.AddRange(loadGenresList);
             
-            var genresList = genres.Select(x => x.GenreName).Distinct();
-
-            foreach (var c in genresList)
-            {
-                try
-                {
-                    ListViewItem l = new ListViewItem();
-                    l.Content = c;
-                    GenreListBox.Items.Add(l);
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-
-            }
         }
 
         
