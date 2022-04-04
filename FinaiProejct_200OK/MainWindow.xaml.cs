@@ -1,7 +1,9 @@
 ﻿using FinaiProejct_200OK.Entities;
 using FinaiProejct_200OK.Utilities;
+using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -37,6 +39,9 @@ namespace FinaiProejct_200OK
         DirectorParser dp = new DirectorParser();
         GenreParser gp = new GenreParser();
 
+        string directorFileName = "";
+        string genreFileName = "";
+
         public MainWindow()
         {
             InitializeComponent();
@@ -61,7 +66,9 @@ namespace FinaiProejct_200OK
                 LoginButton.Click += LoginButtonClick;
                 subLogInButton.Click += SubLoginButtonClick;
                 LogoutButton.Click += LogOutButtonClick;
-                
+                AddGenresBtn.Click += selectGenreFile;
+                AddDirectorBtn.Click += selectDirectorFile;
+
             }
         }
 
@@ -69,19 +76,65 @@ namespace FinaiProejct_200OK
         {            
             loginPage.Show();
         }
-            
-        
+
+        private void selectDirectorFile(object o, EventArgs e)
+        {
+            if (o.Equals(AddDirectorBtn))
+            {
+                OpenFileDialog openFileDialogue = new OpenFileDialog();
+                // Only show user the Data folder with only "directors.csv" file in it
+                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
+                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
+                openFileDialogue.Filter = "CSV Files(directors.csv)|directors.csv";
+                openFileDialogue.RestoreDirectory = true;
+
+                Nullable<bool> result = openFileDialogue.ShowDialog();
+
+                if (result == true)
+                {
+                    directorFileName = openFileDialogue.FileName;
+                }
+                else
+                {
+                    return;
+                }
+                List<Director> loadDirectorsList = DirectorParser.ParseDirector(fs.ReadFile(directorFileName));
+                directors.AddRange(loadDirectorsList);
+
+                InitializeDirectorsListBox();
+            }
+        }
+
+        private void selectGenreFile(object o, EventArgs e)
+        {
+            if (o.Equals(AddGenresBtn))
+            {
+                OpenFileDialog openFileDialogue = new OpenFileDialog();
+                // Only show user the Data folder with only "directors.csv" file in it
+                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
+                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
+                openFileDialogue.Filter = "CSV Files(genres.csv)|genres.csv";
+                openFileDialogue.RestoreDirectory = true;
+
+                Nullable<bool> result = openFileDialogue.ShowDialog();
+                if (result == true)
+                {
+                    genreFileName = openFileDialogue.FileName;
+                }
+                else
+                {
+                    return;
+                }
+                List<Genre> loadGenreList = GenreParser.ParseGenre(fs.ReadFile(genreFileName));
+                genres.AddRange(loadGenreList);
+                InitializeGenresListBox();
+            }
+        }
 
         public void InitializeDirectorsListBox()
         {
             DirectorListBox.Items.Clear();
-            List<Director> loadDirectorsList = DirectorParser.ParseDirector(fs.ReadFile(@"..\\..\\Data\\directors.csv"));
-            //Read the fileContents in from the parser
-
-            directors.AddRange(loadDirectorsList);
-            
             var directorsList = directors.Select(x => x.DirectorName).Distinct();
-
             foreach (var c in directorsList)
             {
                 try
@@ -100,12 +153,7 @@ namespace FinaiProejct_200OK
         public void InitializeGenresListBox()
         {
             GenreListBox.Items.Clear();
-            List<Genre> loadGenresList = GenreParser.ParseGenre(fs.ReadFile(@"..\\..\\Data\\genres.csv"));
-            //Read the fileContents in from the parser
-            genres.AddRange(loadGenresList);
-
             var genresList = genres.Select(x => x.GenreName).Distinct();
-
             foreach (var c in genresList)
             {
                 try
@@ -118,7 +166,6 @@ namespace FinaiProejct_200OK
                 {
                     MessageBox.Show(e.Message);
                 }
-
             }
         }
 
@@ -157,8 +204,5 @@ namespace FinaiProejct_200OK
             
         }
 
-        
-
-        
     }
 }
