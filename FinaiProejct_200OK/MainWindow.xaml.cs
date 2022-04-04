@@ -35,6 +35,7 @@ namespace FinaiProejct_200OK
         DataGrid movieGrid;
         List<Director> directors = new List<Director>();
         List<Genre> genres = new List<Genre>();
+        List<Movie> movies;
 
         FileService fs = new FileService();
         DirectorParser dp = new DirectorParser();
@@ -45,14 +46,18 @@ namespace FinaiProejct_200OK
 
         public MainWindow()
         {
+            
             InitializeComponent();
+            movies = new List<Movie>();
             myUser = null;
             loginPage = new Login();
             subLogInButton = loginPage.SubLoginButton;
             createPage = new CreateAccount();
+            ReadTheUser();
 
             InitializeDirectorsListBox();
             InitializeGenresListBox();
+            PopulateMovie();
             movieGrid = MovieDataGrid;
 
             toggleEvent(true);
@@ -178,25 +183,22 @@ namespace FinaiProejct_200OK
         {
             using (var ctx = new MovieContext())
             {
-                /*var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).First();
+                var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).First();
                 if (loginPage.PasswordTextBox.Text == user.getPassword())
                 {
                     myUser = user;
                     LogoutButton.Visibility = Visibility.Visible;
                     LoginButton.Visibility = Visibility.Hidden;
-                    loginPage.Close();
+                    loginPage.HintTextBlock.Text = "";
+                    loginPage.UserNameTextBox.Text = "";
+                    loginPage.PasswordTextBox.Text = "";
+                    loginPage.Hide();
                 }
                 else
                 {
                     loginPage.HintTextBlock.Visibility = Visibility.Visible;
                     loginPage.HintTextBlock.Text = "Wrong input information";
-                }*/
-                LogoutButton.Visibility = Visibility.Visible;
-                LoginButton.Visibility = Visibility.Hidden;
-                loginPage.HintTextBlock.Text = "";
-                loginPage.UserNameTextBox.Text = "";
-                loginPage.PasswordTextBox.Text = "";
-                loginPage.Hide();
+                }                
             }
         }
 
@@ -209,5 +211,69 @@ namespace FinaiProejct_200OK
             
         }
 
+        private void SubCreateButtonClick(Object o, EventArgs e)
+        {
+            if (createPage.CreateUserNameTextBox.Text.Length == 0 || createPage.CreatePasswordTextBox.Text.Length == 0)
+            {
+                createPage.CreateHintTextBlock.Text = "Please input both user name and password";
+            } else
+            {
+                using (var ctx = new MovieContext())
+                {
+                    var count = ctx.User.Where(x => x.UserName == createPage.CreateUserNameTextBox.Text).Count();
+
+                    if (count == 0)
+                    {
+                        User newUser = new User();
+                        newUser.UserName = createPage.CreateUserNameTextBox.Text;
+                        newUser.setPassword(createPage.CreatePasswordTextBox.Text);
+                        ctx.User.Add(newUser);
+                        ctx.SaveChanges();
+                        createPage.Hide();
+
+                    }
+                    else
+                    {
+                        createPage.CreateHintTextBlock.Text = "The user name is used. Please input another one!";
+                    }
+                }
+            }
+            
+        }
+
+        private void PopulateMovie()
+        {
+            MovieDataGrid.Items.Clear();
+            movies = MovieParser.ParseMovie(fs.ReadFile(@"..\\..\\Data\\movies.csv"));
+            
+
+            foreach (Movie m in movies)
+            {
+                MovieDataGrid.Items.Add(m);
+                
+            }
+        }
+
+        private void ReadTheUser()
+        {
+            using (var ctx = new MovieContext())
+            {
+                var count = ctx.User.Count();
+                if (count == 0)
+                {
+                    List<User> usersList = new List<User>();
+                    usersList = UserParser.ParseUser(fs.ReadFile(@"..\\..\\Data\\user.csv"));
+                    foreach (User theUser in usersList)
+                    {
+                        ctx.User.Add(theUser);
+                    }
+                    ctx.SaveChanges();
+                }
+            }
+        }
+
+        
+
+        
     }
 }

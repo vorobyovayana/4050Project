@@ -26,7 +26,7 @@ namespace FinaiProejct_200OK.Utilities
                 //MessageBox.Show(fields.Length.ToString());
                 if (fields.Length != 2)
                 {
-                    MessageBox.Show("Problem parsing file, check format");
+                    System.Windows.MessageBox.Show("Problem parsing file, check format");
                     continue;
                 }
                 else
@@ -36,6 +36,7 @@ namespace FinaiProejct_200OK.Utilities
                         Movie newMovie = new Movie();
                         newMovie.MovieTitle = fields[0];
                         newMovie.ReleaseDate = DateTime.Parse(fields[1]);
+                        movies.Add(newMovie);
                     }
                     catch (Exception ex)
                     {
