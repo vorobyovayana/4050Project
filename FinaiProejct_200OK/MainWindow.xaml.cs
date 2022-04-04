@@ -15,6 +15,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
+
 namespace FinaiProejct_200OK
 {
     /// <summary>
@@ -22,15 +23,32 @@ namespace FinaiProejct_200OK
     /// </summary>
     public partial class MainWindow : Window
     {
-        DataGrid movieGrid;
+        private User myUser;
+        
+        
         public MainWindow()
         {
             InitializeComponent();
+            myUser = null;
 
-            movieGrid = MovieDataGrid;
+            toggleEvent(true);
 
             
             
+        }
+
+        private void toggleEvent(bool toggle)
+        {
+            if (toggle)
+            {
+                LoginButton.Click += LoginButtonClick;
+            }
+        }
+
+        private void LoginButtonClick(Object o, EventArgs e)
+        {
+            Login loginPage = new Login();
+            loginPage.Show();
         }
     }
 }

@@ -23,7 +23,7 @@ namespace FinaiProejct_200OK
     public partial class Login : Window
     {
 
-        public string UserName { get; set; }
+        
         public Login()
         {
             InitializeComponent();
@@ -40,7 +40,7 @@ namespace FinaiProejct_200OK
                 var user = ctx.User.Where(x => x.UserName == UserNameTextBox.Text).First();
                 if (PasswordTextBox.Text == user.getPassword())
                 {
-                    this.UserName = user.UserName;
+                    
                     this.Close();
                 } else
                 {
