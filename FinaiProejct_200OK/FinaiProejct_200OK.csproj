@@ -187,8 +187,10 @@
       <DependentUpon>20220331043348_addReview.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
+    <Compile Include="Utilities\DirectorParser.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
     <Compile Include="Utilities\FileService.cs" />
+    <Compile Include="Utilities\GenreParser.cs" />
     <Compile Include="Utilities\MovieContext.cs" />
     <Compile Include="Utilities\FavoriteCSVParser.cs" />
     <Compile Include="Utilities\ReviewCSVParser.cs" />

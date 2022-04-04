@@ -11,5 +11,12 @@ namespace FinaiProejct_200OK.Entities
     {
         [Key]
         public int DirectorId { get; set; }
+
+        public string DirectorName { get; set; }
+
+        public Director()
+        {
+
+        }
     }
 }
