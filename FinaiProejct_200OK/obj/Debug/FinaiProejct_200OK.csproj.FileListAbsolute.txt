@@ -1,18 +1,3 @@
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.exe.config
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.exe
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.pdb
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.csproj.AssemblyReference.cache
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\MainWindow.g.cs
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\App.g.cs
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK_MarkupCompile.cache
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK_MarkupCompile.lref
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\MainWindow.baml
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.g.resources
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.Properties.Resources.resources
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.csproj.GenerateResource.cache
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.csproj.CoreCompileInputs.cache
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.exe
-D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.pdb
 C:\Users\vorob\4050Project\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.exe.config
 C:\Users\vorob\4050Project\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.exe
 C:\Users\vorob\4050Project\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.pdb
@@ -109,6 +94,9 @@ C:\Users\vorob\4050Project\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.cspro
 C:\Users\vorob\4050Project\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.csproj.CopyComplete
 C:\Users\vorob\4050Project\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.exe
 C:\Users\vorob\4050Project\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.pdb
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.exe.config
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.exe
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\FinaiProejct_200OK.pdb
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\Microsoft.Bcl.AsyncInterfaces.dll
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\Microsoft.Bcl.HashCode.dll
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\Microsoft.Data.SqlClient.dll
@@ -189,6 +177,19 @@ D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bi
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\ru\Microsoft.Data.SqlClient.resources.dll
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\zh-Hans\Microsoft.Data.SqlClient.resources.dll
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\bin\Debug\zh-Hant\Microsoft.Data.SqlClient.resources.dll
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\CreateAccount.g.cs
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\Login.g.cs
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\MainWindow.g.cs
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\App.g.cs
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK_MarkupCompile.cache
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK_MarkupCompile.lref
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\CreateAccount.baml
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\Login.baml
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\MainWindow.baml
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.g.resources
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.Properties.Resources.resources
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.csproj.GenerateResource.cache
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.csproj.CoreCompileInputs.cache
 D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.csproj.CopyComplete
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.exe
+D:\My typing\C#\CSIS 4050\Final Project\FinaiProejct_200OK\FinaiProejct_200OK\obj\Debug\FinaiProejct_200OK.pdb

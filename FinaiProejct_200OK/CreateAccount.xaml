@@ -12,7 +12,7 @@
         <TextBox x:Name="CreateUserNameTextBox" HorizontalAlignment="Left" Height="23" Margin="117,42,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <TextBox x:Name="CreatePasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="117,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="SubCreateButton" Content="Create" HorizontalAlignment="Left" Margin="162,125,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBlock x:Name="HintTextBlock" HorizontalAlignment="Left" Margin="117,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.335" Width="120"/>
+        <TextBlock x:Name="CreateHintTextBlock" HorizontalAlignment="Left" Margin="10,104,-0.4,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.335" Width="260" Foreground="Red" FontSize="10"/>
 
     </Grid>
 </Window>

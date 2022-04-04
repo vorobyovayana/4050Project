@@ -63,6 +63,8 @@ namespace FinaiProejct_200OK
                 LoginButton.Click += LoginButtonClick;
                 subLogInButton.Click += SubLoginButtonClick;
                 LogoutButton.Click += LogOutButtonClick;
+                CreateButton.Click += CreateButtonClick;
+                createPage.SubCreateButton.Click += SubCreateButtonClick;
                 
             }
         }
@@ -161,26 +163,37 @@ namespace FinaiProejct_200OK
 
         private void CreateButtonClick(Object o, EventArgs e)
         {
+            createPage.Show();
+        }
+
+        private void SubCreateButtonClick(Object o, EventArgs e)
+        {
             if (createPage.CreateUserNameTextBox.Text.Length == 0 || createPage.CreatePasswordTextBox.Text.Length == 0)
             {
                 createPage.CreateHintTextBlock.Text = "Please input both user name and password";
-            }
-            using (var ctx = new MovieContext())
+            } else
             {
-                var count = ctx.User.Where(x => x.UserName == createPage.CreateUserNameTextBox.Text).Count();
-                if (count == 0)
+                using (var ctx = new MovieContext())
                 {
-                    User newUser = new User();
-                    newUser.UserName = createPage.CreateUserNameTextBox.Text;
-                    newUser.setPassword(createPage.CreatePasswordTextBox.Text);
-                    ctx.SaveChanges();
-                    createPage.Hide();
+                    var count = ctx.User.Where(x => x.UserName == createPage.CreateUserNameTextBox.Text).Count();
 
-                } else
-                {
-                    createPage.CreateHintTextBlock.Text = "The user name is used. Please input another one!";
+                    if (count == 0)
+                    {
+                        User newUser = new User();
+                        newUser.UserName = createPage.CreateUserNameTextBox.Text;
+                        newUser.setPassword(createPage.CreatePasswordTextBox.Text);
+                        ctx.User.Add(newUser);
+                        ctx.SaveChanges();
+                        createPage.Hide();
+
+                    }
+                    else
+                    {
+                        createPage.CreateHintTextBlock.Text = "The user name is used. Please input another one!";
+                    }
                 }
             }
+            
         }
 
         
