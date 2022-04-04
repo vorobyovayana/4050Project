@@ -19,7 +19,7 @@
         <Button Name ="AddDirectorsBtn" Content="Populate Directors" HorizontalAlignment="Left" Margin="65,32,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="AddGenreBtn" Content="Populate Genres" HorizontalAlignment="Left" Margin="65,64,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="CreateButton" HorizontalAlignment="Left" Content="Create Account" Margin="656,17,0,0" VerticalAlignment="Top" Width="87" />
-        <TextBlock x:Name="AccountTextBlock" TextWrapping="Wrap" Visibility="Hidden"/>
+        <TextBlock x:Name="AccountTextBlock" TextWrapping="Wrap" Visibility="Hidden"  Foreground="#FF1148E0" Margin="645,10,41.6,373" FontSize="14" HorizontalAlignment="Center"/>
 
 
 
