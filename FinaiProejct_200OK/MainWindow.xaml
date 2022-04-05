@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <DataGrid Name="MovieDataGrid" HorizontalAlignment="Left" Height="220" Margin="212,124,0,0" VerticalAlignment="Top" Width="362"/>
+        <DataGrid Name="MovieDataGrid" HorizontalAlignment="Left" Height="220" Margin="212,124,0,0" VerticalAlignment="Top" Width="362"IsReadOnly="True"/>
         <ListBox Name="GenreListBox" HorizontalAlignment="Left" Height="179" Margin="620,124,0,0" VerticalAlignment="Top" Width="132" RenderTransformOrigin="-0.4,0.236"/>
         <ListBox Name="DirectorListBox" HorizontalAlignment="Left" Height="179" Margin="48,124,0,0" VerticalAlignment="Top" Width="115"/>
         <TextBox Name="SearchTextBox" HorizontalAlignment="Left" Height="20" Margin="259,31,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>

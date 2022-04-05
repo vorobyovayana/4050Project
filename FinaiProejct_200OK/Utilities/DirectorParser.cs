@@ -22,9 +22,9 @@ namespace FinaiProejct_200OK.Utilities
 
                 string[] fields = line.Trim().Split(',');
                 //MessageBox.Show(fields.Length.ToString());
-                if (fields.Length != 2)
+                if (fields.Length != 1)
                 {
-                    MessageBox.Show("Problem parsing file, check format");
+                    MessageBox.Show("Problem parsing file, check format in Director");
                     continue;
                 }
                 else

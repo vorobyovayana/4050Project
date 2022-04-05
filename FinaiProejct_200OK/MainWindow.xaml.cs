@@ -53,7 +53,11 @@ namespace FinaiProejct_200OK
             loginPage = new Login();
             subLogInButton = loginPage.SubLoginButton;
             createPage = new CreateAccount();
-            ReadTheUser();
+            ReadDataToDatabase();
+            InitializeMovieGrid();
+            PopulateMovie();
+            
+
 
             InitializeDirectorsListBox();
             InitializeGenresListBox();
@@ -251,31 +255,101 @@ namespace FinaiProejct_200OK
         private void PopulateMovie()
         {
             MovieDataGrid.Items.Clear();
-            movies = MovieParser.ParseMovie(fs.ReadFile(@"..\\..\\Data\\movies.csv"));
-            
-
-            foreach (Movie m in movies)
-            {
-                MovieDataGrid.Items.Add(m);
-                
-            }
-        }
-
-        private void ReadTheUser()
-        {
             using (var ctx = new MovieContext())
             {
-                var count = ctx.User.Count();
-                if (count == 0)
+                movies = ctx.Movie.ToList();
+                foreach (Movie m in movies)
                 {
-                    List<User> usersList = new List<User>();
-                    usersList = UserParser.ParseUser(fs.ReadFile(@"..\\..\\Data\\user.csv"));
-                    foreach (User theUser in usersList)
-                    {
-                        ctx.User.Add(theUser);
-                    }
-                    ctx.SaveChanges();
+                    MovieDataGrid.Items.Add(m);
+
                 }
+            }
+
+            
+
+            
+        }
+
+        private void InitializeMovieGrid()
+        {
+            DataGridTextColumn movieTitleColumn = new DataGridTextColumn();
+            movieTitleColumn.Header = "Movie Title";
+            movieTitleColumn.Binding = new Binding("MovieTitle");
+
+            DataGridTextColumn movieReleaseDateColumn = new DataGridTextColumn();
+            movieReleaseDateColumn.Header = "Release Date";
+            movieReleaseDateColumn.Binding = new Binding("ReleaseDate");
+            movieReleaseDateColumn.Binding.StringFormat = "dd/MM/yyyy";
+
+            DataGridTextColumn reviewColumn = new DataGridTextColumn();
+            reviewColumn.Header = "Review";
+            reviewColumn.Binding = new Binding("Reviews");
+
+            DataGridTextColumn genreColumn = new DataGridTextColumn();
+            genreColumn.Header = "Genre";
+            genreColumn.Binding = new Binding("Genres");
+
+            DataGridTextColumn directorColumn = new DataGridTextColumn();
+            directorColumn.Header = "Director";
+            directorColumn.Binding = new Binding("MovieDirector");
+
+            MovieDataGrid.Columns.Add(movieTitleColumn);
+            MovieDataGrid.Columns.Add(movieReleaseDateColumn);
+            MovieDataGrid.Columns.Add(reviewColumn);
+            MovieDataGrid.Columns.Add(genreColumn);
+            MovieDataGrid.Columns.Add(directorColumn);
+        }
+        
+        private void ReadDataToDatabase()
+        {
+            
+            using (var ctx = new MovieContext())
+            {
+                // First from director                
+                var count = ctx.Director.Count();
+                if (count < 5)
+                {
+                    List<Director> directorList = new List<Director>();
+                    directorList = DirectorParser.ParseDirector(fs.ReadFile(@"..\\..\\Data\\directors.csv"));
+                    foreach (Director director in directorList)
+                    {
+                        ctx.Director.Add(director);
+                    }
+                }
+
+                ctx.SaveChanges();
+                // Second is Genre                
+                count = ctx.Genre.Count();
+                if (count < 5)
+                {
+                    List<Genre> genreList = new List<Genre>();
+                    genreList = GenreParser.ParseGenre(fs.ReadFile(@"..\\..\\Data\\genres.csv"));
+                    foreach (Genre genre in genreList)
+                    {
+                        ctx.Genre.Add(genre);
+                    }
+                }
+
+                ctx.SaveChanges();
+
+                // Then add into Movie
+                count = ctx.Movie.Count();
+                if (count < 5)
+                {
+                    List<Movie> movieList = new List<Movie>();
+                    movieList = MovieParser.ParseMovie(fs.ReadFile(@"..\\..\\Data\\movies.csv"));
+                    for (int i = 0; i < 5; i++)
+                    {
+                        List<Genre> myGenres = new List<Genre>();
+                        myGenres.Add(ctx.Genre.ToList()[i]);
+                        myGenres.Add(ctx.Genre.ToList()[(i + 2) % 5]);
+                        movieList[i].Genres = myGenres;                        
+                        movieList[i].MovieDirector = ctx.Director.ToList()[i];
+                        ctx.Movie.Add(movieList[i]);
+                    }
+                }
+
+                ctx.SaveChanges();
             }
         }
 
