@@ -12,8 +12,9 @@ namespace FinaiProejct_200OK.Entities
         [Key]
         public int GenreId { get; set; }
         public string GenreName { get; set; }
-       /* public List<Movie> MovieInThisGenre { get; set; }*/
+        /* public List<Movie> MovieInThisGenre { get; set; }*/
 
+        public virtual List<Movie> Movies { get; set; }
         public Genre()
         {
 

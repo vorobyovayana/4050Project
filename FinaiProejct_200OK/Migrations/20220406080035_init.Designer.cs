@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinaiProejct_200OK.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20220331042836_init")]
+    [Migration("20220406080035_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -21,24 +21,15 @@ namespace FinaiProejct_200OK.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("FinaiProejct_200OK.Entities.Detail", b =>
-                {
-                    b.Property<int>("MovieId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.HasKey("MovieId");
-
-                    b.ToTable("Detail");
-                });
-
             modelBuilder.Entity("FinaiProejct_200OK.Entities.Director", b =>
                 {
                     b.Property<int>("DirectorId")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("DirectorName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("DirectorId");
 
@@ -70,14 +61,27 @@ namespace FinaiProejct_200OK.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MovieId")
-                        .HasColumnType("int");
+                    b.Property<string>("GenreName")
+                        .HasColumnType("nvarchar(max)");
 
                     b.HasKey("GenreId");
 
-                    b.HasIndex("MovieId");
-
                     b.ToTable("Genre");
+                });
+
+            modelBuilder.Entity("FinaiProejct_200OK.Entities.IMDBData", b =>
+                {
+                    b.Property<int>("MovieId")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int")
+                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("imdbPath")
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("MovieId");
+
+                    b.ToTable("IMDBData");
                 });
 
             modelBuilder.Entity("FinaiProejct_200OK.Entities.Movie", b =>
@@ -87,10 +91,10 @@ namespace FinaiProejct_200OK.Migrations
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<int?>("MovieDetailMovieId")
+                    b.Property<int>("DirectorId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("MovieDirectorDirectorId")
+                    b.Property<int>("GenreId")
                         .HasColumnType("int");
 
                     b.Property<string>("MovieTitle")
@@ -101,9 +105,9 @@ namespace FinaiProejct_200OK.Migrations
 
                     b.HasKey("MovieId");
 
-                    b.HasIndex("MovieDetailMovieId");
+                    b.HasIndex("DirectorId");
 
-                    b.HasIndex("MovieDirectorDirectorId");
+                    b.HasIndex("GenreId");
 
                     b.ToTable("Movie");
                 });
@@ -121,9 +125,14 @@ namespace FinaiProejct_200OK.Migrations
                     b.Property<string>("ReviewDesc")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<int?>("UserId")
+                        .HasColumnType("int");
+
                     b.HasKey("ReviewId");
 
                     b.HasIndex("MovieId");
+
+                    b.HasIndex("UserId");
 
                     b.ToTable("Review");
                 });
@@ -134,6 +143,9 @@ namespace FinaiProejct_200OK.Migrations
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int")
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+
+                    b.Property<string>("Password")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("UserName")
                         .HasColumnType("nvarchar(max)");
@@ -150,22 +162,19 @@ namespace FinaiProejct_200OK.Migrations
                         .HasForeignKey("UserId");
                 });
 
-            modelBuilder.Entity("FinaiProejct_200OK.Entities.Genre", b =>
-                {
-                    b.HasOne("FinaiProejct_200OK.Entities.Movie", null)
-                        .WithMany("Genres")
-                        .HasForeignKey("MovieId");
-                });
-
             modelBuilder.Entity("FinaiProejct_200OK.Entities.Movie", b =>
                 {
-                    b.HasOne("FinaiProejct_200OK.Entities.Detail", "MovieDetail")
-                        .WithMany()
-                        .HasForeignKey("MovieDetailMovieId");
+                    b.HasOne("FinaiProejct_200OK.Entities.Director", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("DirectorId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
 
-                    b.HasOne("FinaiProejct_200OK.Entities.Director", "MovieDirector")
-                        .WithMany()
-                        .HasForeignKey("MovieDirectorDirectorId");
+                    b.HasOne("FinaiProejct_200OK.Entities.Genre", null)
+                        .WithMany("Movies")
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FinaiProejct_200OK.Entities.Review", b =>
@@ -175,6 +184,10 @@ namespace FinaiProejct_200OK.Migrations
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
+
+                    b.HasOne("FinaiProejct_200OK.Entities.User", null)
+                        .WithMany("Reviews")
+                        .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
         }

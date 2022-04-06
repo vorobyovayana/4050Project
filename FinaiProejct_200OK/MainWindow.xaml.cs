@@ -274,8 +274,8 @@ namespace FinaiProejct_200OK
                     MovieTempForList currentMovie = new MovieTempForList();
                     currentMovie.MovieTitle = m.MovieTitle;
                     currentMovie.ReleaseDate = m.ReleaseDate;
-                    currentMovie.MovieDirector = m.MovieDirector.ToString();                    
-                    currentMovie.MovieGenres = m.Genres[0].ToString() + "; " + m.Genres[1].ToString();
+                    //currentMovie.MovieDirector = m.MovieDirector.ToString();                    
+                    //currentMovie.MovieGenres = m.Genres[0].ToString() + "; " + m.Genres[1].ToString();
                     MovieDataGrid.Items.Add(currentMovie);
 
                 }
@@ -354,8 +354,8 @@ namespace FinaiProejct_200OK
                         List<Genre> myGenres = new List<Genre>();
                         myGenres.Add(ctx.Genre.ToList()[i]);                        
                         myGenres.Add(ctx.Genre.ToList()[(i + 2) % 5]);
-                        movieList[i].Genres = myGenres;                        
-                        movieList[i].MovieDirector = ctx.Director.ToList()[i];
+                       // movieList[i].Genres = myGenres;                        
+                        //movieList[i].MovieDirector = ctx.Director.ToList()[i];
                         ctx.Movie.Add(movieList[i]);
                         
                     }

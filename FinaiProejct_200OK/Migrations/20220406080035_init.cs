@@ -8,27 +8,42 @@ namespace FinaiProejct_200OK.Migrations
         protected override void Up(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.CreateTable(
-                name: "Detail",
-                columns: table => new
-                {
-                    MovieId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Detail", x => x.MovieId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Director",
                 columns: table => new
                 {
                     DirectorId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1")
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    DirectorName = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Director", x => x.DirectorId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "Genre",
+                columns: table => new
+                {
+                    GenreId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    GenreName = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_Genre", x => x.GenreId);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IMDBData",
+                columns: table => new
+                {
+                    MovieId = table.Column<int>(nullable: false)
+                        .Annotation("SqlServer:Identity", "1, 1"),
+                    imdbPath = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IMDBData", x => x.MovieId);
                 });
 
             migrationBuilder.CreateTable(
@@ -37,7 +52,8 @@ namespace FinaiProejct_200OK.Migrations
                 {
                     UserId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
-                    UserName = table.Column<string>(nullable: true)
+                    UserName = table.Column<string>(nullable: true),
+                    Password = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -50,26 +66,26 @@ namespace FinaiProejct_200OK.Migrations
                 {
                     MovieId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
+                    GenreId = table.Column<int>(nullable: false),
+                    DirectorId = table.Column<int>(nullable: false),
                     MovieTitle = table.Column<string>(nullable: true),
-                    ReleaseDate = table.Column<DateTime>(nullable: false),
-                    MovieDetailMovieId = table.Column<int>(nullable: true),
-                    MovieDirectorDirectorId = table.Column<int>(nullable: true)
+                    ReleaseDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
                 {
                     table.PrimaryKey("PK_Movie", x => x.MovieId);
                     table.ForeignKey(
-                        name: "FK_Movie_Detail_MovieDetailMovieId",
-                        column: x => x.MovieDetailMovieId,
-                        principalTable: "Detail",
-                        principalColumn: "MovieId",
-                        onDelete: ReferentialAction.Restrict);
-                    table.ForeignKey(
-                        name: "FK_Movie_Director_MovieDirectorDirectorId",
-                        column: x => x.MovieDirectorDirectorId,
+                        name: "FK_Movie_Director_DirectorId",
+                        column: x => x.DirectorId,
                         principalTable: "Director",
                         principalColumn: "DirectorId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Movie_Genre_GenreId",
+                        column: x => x.GenreId,
+                        principalTable: "Genre",
+                        principalColumn: "GenreId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -92,32 +108,14 @@ namespace FinaiProejct_200OK.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "Genre",
-                columns: table => new
-                {
-                    GenreId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    MovieId = table.Column<int>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Genre", x => x.GenreId);
-                    table.ForeignKey(
-                        name: "FK_Genre_Movie_MovieId",
-                        column: x => x.MovieId,
-                        principalTable: "Movie",
-                        principalColumn: "MovieId",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "Review",
                 columns: table => new
                 {
                     ReviewId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MovieId = table.Column<int>(nullable: false),
-                    ReviewDesc = table.Column<string>(nullable: true)
+                    ReviewDesc = table.Column<string>(nullable: true),
+                    UserId = table.Column<int>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -128,6 +126,12 @@ namespace FinaiProejct_200OK.Migrations
                         principalTable: "Movie",
                         principalColumn: "MovieId",
                         onDelete: ReferentialAction.Cascade);
+                    table.ForeignKey(
+                        name: "FK_Review_User_UserId",
+                        column: x => x.UserId,
+                        principalTable: "User",
+                        principalColumn: "UserId",
+                        onDelete: ReferentialAction.Restrict);
                 });
 
             migrationBuilder.CreateIndex(
@@ -136,24 +140,24 @@ namespace FinaiProejct_200OK.Migrations
                 column: "UserId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Genre_MovieId",
-                table: "Genre",
-                column: "MovieId");
+                name: "IX_Movie_DirectorId",
+                table: "Movie",
+                column: "DirectorId");
 
             migrationBuilder.CreateIndex(
-                name: "IX_Movie_MovieDetailMovieId",
+                name: "IX_Movie_GenreId",
                 table: "Movie",
-                column: "MovieDetailMovieId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Movie_MovieDirectorDirectorId",
-                table: "Movie",
-                column: "MovieDirectorDirectorId");
+                column: "GenreId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Review_MovieId",
                 table: "Review",
                 column: "MovieId");
+
+            migrationBuilder.CreateIndex(
+                name: "IX_Review_UserId",
+                table: "Review",
+                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
@@ -162,22 +166,22 @@ namespace FinaiProejct_200OK.Migrations
                 name: "Favorite");
 
             migrationBuilder.DropTable(
-                name: "Genre");
+                name: "IMDBData");
 
             migrationBuilder.DropTable(
                 name: "Review");
 
             migrationBuilder.DropTable(
-                name: "User");
-
-            migrationBuilder.DropTable(
                 name: "Movie");
 
             migrationBuilder.DropTable(
-                name: "Detail");
+                name: "User");
 
             migrationBuilder.DropTable(
                 name: "Director");
+
+            migrationBuilder.DropTable(
+                name: "Genre");
         }
     }
 }

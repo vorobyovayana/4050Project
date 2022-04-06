@@ -15,7 +15,7 @@ namespace FinaiProejct_200OK.Utilities
         public DbSet<Genre> Genre { get; set; }
         public DbSet<Favorite> Favorite { get; set; }
         public DbSet<Director> Director { get; set; }
-        public DbSet<Detail> Detail { get; set; }
+        public DbSet<IMDBData> IMDBData { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -26,9 +26,6 @@ namespace FinaiProejct_200OK.Utilities
             modelBuilder.Entity<Favorite>()
                 .HasKey(c => new { c.MemberId, c.MovieId });
 
-            modelBuilder.Entity<Movie>()
-                .HasOne(m => m.MovieDirector)
-                .WithMany(d => d.Movies);
         }
     }
 }

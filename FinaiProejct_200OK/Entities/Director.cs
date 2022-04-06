@@ -10,7 +10,7 @@ namespace FinaiProejct_200OK.Entities
     class Director
     {
         [Key]
-        public int DirectorId { get; set; }
+       public int DirectorId { get; set; }
 
         public string DirectorName { get; set; }
         public List<Movie> Movies { get; set; }
@@ -20,9 +20,9 @@ namespace FinaiProejct_200OK.Entities
 
         }
 
-        public override string ToString()
+        /*public override string ToString()
         {
             return DirectorName;
-        }
+        }*/
     }
 }

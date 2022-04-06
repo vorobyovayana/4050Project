@@ -181,17 +181,9 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20220331042836_init.cs" />
-    <Compile Include="Migrations\20220331042836_init.designer.cs">
-      <DependentUpon>20220331042836_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220331043348_addReview.cs" />
-    <Compile Include="Migrations\20220331043348_addReview.designer.cs">
-      <DependentUpon>20220331043348_addReview.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220404200116_add_Password_To_Database.cs" />
-    <Compile Include="Migrations\20220404200116_add_Password_To_Database.designer.cs">
-      <DependentUpon>20220404200116_add_Password_To_Database.cs</DependentUpon>
+    <Compile Include="Migrations\20220406080035_init.cs" />
+    <Compile Include="Migrations\20220406080035_init.designer.cs">
+      <DependentUpon>20220406080035_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
     <Compile Include="Utilities\MovieParser.cs" />
@@ -219,7 +211,7 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="Entities\Detail.cs" />
+    <Compile Include="Entities\IMDBData.cs" />
     <Compile Include="Entities\Director.cs" />
     <Compile Include="Entities\Favorite.cs" />
     <Compile Include="Entities\Genre.cs" />
