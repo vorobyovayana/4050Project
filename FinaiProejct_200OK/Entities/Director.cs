@@ -13,10 +13,16 @@ namespace FinaiProejct_200OK.Entities
         public int DirectorId { get; set; }
 
         public string DirectorName { get; set; }
+        public List<Movie> Movies { get; set; }
 
         public Director()
         {
 
+        }
+
+        public override string ToString()
+        {
+            return DirectorName;
         }
     }
 }

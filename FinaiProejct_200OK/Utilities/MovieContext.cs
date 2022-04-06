@@ -25,6 +25,10 @@ namespace FinaiProejct_200OK.Utilities
         {
             modelBuilder.Entity<Favorite>()
                 .HasKey(c => new { c.MemberId, c.MovieId });
+
+            modelBuilder.Entity<Movie>()
+                .HasOne(m => m.MovieDirector)
+                .WithMany(d => d.Movies);
         }
     }
 }

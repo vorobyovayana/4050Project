@@ -54,7 +54,7 @@ namespace FinaiProejct_200OK
             subLogInButton = loginPage.SubLoginButton;
             createPage = new CreateAccount();
             ReadDataToDatabase();
-            InitializeMovieGrid();
+            /*InitializeMovieGrid();*/
             PopulateMovie();
             
 
@@ -148,7 +148,12 @@ namespace FinaiProejct_200OK
         public void InitializeDirectorsListBox()
         {
             DirectorListBox.Items.Clear();
-            var directorsList = directors.Select(x => x.DirectorName).Distinct();
+            List<string> directorsList;
+            using (var ctx = new MovieContext())
+            {
+                directorsList = ctx.Director.Select(x => x.DirectorName).ToList();
+            }
+           
             foreach (var c in directorsList)
             {
                 try
@@ -167,7 +172,12 @@ namespace FinaiProejct_200OK
         public void InitializeGenresListBox()
         {
             GenreListBox.Items.Clear();
-            var genresList = genres.Select(x => x.GenreName).Distinct();
+            List<string> genresList;
+            using (var ctx = new MovieContext())
+            {
+                genresList = ctx.Genre.Select(x => x.GenreName).ToList();
+            }
+            
             foreach (var c in genresList)
             {
                 try
@@ -260,17 +270,19 @@ namespace FinaiProejct_200OK
                 movies = ctx.Movie.ToList();
                 foreach (Movie m in movies)
                 {
-                    MovieDataGrid.Items.Add(m);
+                    
+                    MovieTempForList currentMovie = new MovieTempForList();
+                    currentMovie.MovieTitle = m.MovieTitle;
+                    currentMovie.ReleaseDate = m.ReleaseDate;
+                    currentMovie.MovieDirector = m.MovieDirector.ToString();                    
+                    currentMovie.MovieGenres = m.Genres[0].ToString() + "; " + m.Genres[1].ToString();
+                    MovieDataGrid.Items.Add(currentMovie);
 
                 }
-            }
-
-            
-
-            
+            }            
         }
 
-        private void InitializeMovieGrid()
+        /*private void InitializeMovieGrid()
         {
             DataGridTextColumn movieTitleColumn = new DataGridTextColumn();
             movieTitleColumn.Header = "Movie Title";
@@ -281,24 +293,23 @@ namespace FinaiProejct_200OK
             movieReleaseDateColumn.Binding = new Binding("ReleaseDate");
             movieReleaseDateColumn.Binding.StringFormat = "dd/MM/yyyy";
 
-            DataGridTextColumn reviewColumn = new DataGridTextColumn();
+            *//*DataGridTextColumn reviewColumn = new DataGridTextColumn();
             reviewColumn.Header = "Review";
-            reviewColumn.Binding = new Binding("Reviews");
+            reviewColumn.Binding = new Binding("Reviews");*//*
+            
 
             DataGridTextColumn genreColumn = new DataGridTextColumn();
-            genreColumn.Header = "Genre";
-            genreColumn.Binding = new Binding("Genres");
+            genreColumn.Header = "Genre";            
 
             DataGridTextColumn directorColumn = new DataGridTextColumn();
-            directorColumn.Header = "Director";
-            directorColumn.Binding = new Binding("MovieDirector");
+            directorColumn.Header = "Director";            
 
             MovieDataGrid.Columns.Add(movieTitleColumn);
             MovieDataGrid.Columns.Add(movieReleaseDateColumn);
-            MovieDataGrid.Columns.Add(reviewColumn);
+            *//*MovieDataGrid.Columns.Add(reviewColumn);*//*
             MovieDataGrid.Columns.Add(genreColumn);
             MovieDataGrid.Columns.Add(directorColumn);
-        }
+        }*/
         
         private void ReadDataToDatabase()
         {
@@ -341,16 +352,25 @@ namespace FinaiProejct_200OK
                     for (int i = 0; i < 5; i++)
                     {
                         List<Genre> myGenres = new List<Genre>();
-                        myGenres.Add(ctx.Genre.ToList()[i]);
+                        myGenres.Add(ctx.Genre.ToList()[i]);                        
                         myGenres.Add(ctx.Genre.ToList()[(i + 2) % 5]);
                         movieList[i].Genres = myGenres;                        
                         movieList[i].MovieDirector = ctx.Director.ToList()[i];
                         ctx.Movie.Add(movieList[i]);
+                        
                     }
                 }
 
                 ctx.SaveChanges();
             }
+        }
+
+        private class MovieTempForList
+        {
+            public string MovieTitle { get; set; }
+            public DateTime ReleaseDate { get; set; }
+            public string MovieDirector { get; set; }
+            public string MovieGenres { get; set; }
         }
 
         
