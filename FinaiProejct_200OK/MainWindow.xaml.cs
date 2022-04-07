@@ -46,7 +46,7 @@ namespace FinaiProejct_200OK
 
         public MainWindow()
         {
-            
+
             InitializeComponent();
             movies = new List<Movie>();
             myUser = null;
@@ -56,78 +56,18 @@ namespace FinaiProejct_200OK
             ReadDataToDatabase();
             /*InitializeMovieGrid();*/
             PopulateMovie();
-            
+
 
 
             InitializeDirectorsListBox();
-            
-        }
-
-        private void selectDirectorFile(object o, EventArgs e)
-        {
-            if (o.Equals(AddDirectorBtn))
-            {
-                OpenFileDialog openFileDialogue = new OpenFileDialog();
-                // Only show user the Data folder with only "directors.csv" file in it
-                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
-                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
-                openFileDialogue.Filter = "CSV Files(directors.csv)|directors.csv";
-                openFileDialogue.RestoreDirectory = true;
-
-                Nullable<bool> result = openFileDialogue.ShowDialog();
-
-                if (result == true)
-                {
-                    directorFileName = openFileDialogue.FileName;
-                }
-                else
-                {
-                    return;
-                }
-                List<Director> loadDirectorsList = DirectorParser.ParseDirector(fs.ReadFile(directorFileName));
-                uploadDirectors();
-            }
-        }
-
-        private void selectGenreFile(object o, EventArgs e)
-        {
-            if (o.Equals(AddGenresBtn))
-            {
-                OpenFileDialog openFileDialogue = new OpenFileDialog();
-                // Only show user the Data folder with only "directors.csv" file in it
-                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
-                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
-                openFileDialogue.Filter = "CSV Files(genres.csv)|genres.csv";
-                openFileDialogue.RestoreDirectory = true;
-
-                Nullable<bool> result = openFileDialogue.ShowDialog();
-                if (result == true)
-                {
-                    genreFileName = openFileDialogue.FileName;
-                }
-                else
-                {
-                    return;
-                }
-                List<Genre> loadGenreList = GenreParser.ParseGenre(fs.ReadFile(genreFileName));
-                genres.AddRange(loadGenreList);
-                uploadGenres();
-
-            }
-        }
-
-        public void uploadGenres()
-        {
-            using (var ctx = new MovieContext())
-            {
-                foreach (Genre g in genres)
-                {
-                    ctx.Genre.Add(g);
-                    ctx.SaveChanges();
-                }
-
-            }
             InitializeGenresListBox();
+            PopulateMovie();
+            movieGrid = MovieDataGrid;
+
+            toggleEvent(true);
+
+
+
         }
 
         private void toggleEvent(bool toggle)
@@ -139,15 +79,15 @@ namespace FinaiProejct_200OK
                 LogoutButton.Click += LogOutButtonClick;
                 //CreateButton.Click += CreateButtonClick;
                 //createPage.SubCreateButton.Click += SubCreateButtonClick;
-                
+
                 AddGenreBtn.Click += selectGenreFile;
-                AddDirectorsBtn.Click += selectDirectorFile;
+                AddDirectorBtn.Click += selectDirectorFile;
 
             }
         }
 
         private void LoginButtonClick(Object o, EventArgs e)
-        {            
+        {
             loginPage.Show();
         }
 
@@ -176,32 +116,6 @@ namespace FinaiProejct_200OK
                 uploadDirectors();
             }
         }
-        public void uploadDirectors()
-        {
-            using (var ctx = new MovieContext())
-            {
-                foreach (Director d in directors)
-                {
-                    ctx.Director.Add(d);
-                    ctx.SaveChanges();
-                }
-                InitializeDirectorsListBox();
-             }
-
-                if (result == true)
-                {
-                    directorFileName = openFileDialogue.FileName;
-                }
-                else
-                {
-                    return;
-                }
-                List<Director> loadDirectorsList = DirectorParser.ParseDirector(fs.ReadFile(directorFileName));
-                directors.AddRange(loadDirectorsList);
-
-                InitializeDirectorsListBox();
-            }
-        }
 
         private void selectGenreFile(object o, EventArgs e)
         {
@@ -225,35 +139,38 @@ namespace FinaiProejct_200OK
                 }
                 List<Genre> loadGenreList = GenreParser.ParseGenre(fs.ReadFile(genreFileName));
                 genres.AddRange(loadGenreList);
-                InitializeGenresListBox();
+                uploadGenres();
+
             }
         }
-
-        public void InitializeDirectorsListBox()
+        public void uploadGenres()
         {
-            DirectorListBox.Items.Clear();
-            List<string> directorsList;
             using (var ctx = new MovieContext())
             {
-                directorsList = ctx.Director.Select(x => x.DirectorName).ToList();
-            }
-           
-            foreach (var c in directorsList)
-            {
-                try
+                foreach (Genre g in genres)
                 {
-                    ListViewItem l = new ListViewItem();
-                    l.Content = c;
-                    DirectorListBox.Items.Add(l);
+                    ctx.Genre.Add(g);
+                    ctx.SaveChanges();
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
-            }
-        }
-           
 
+            }
+            InitializeGenresListBox();
+        }
+
+        public void uploadDirectors()
+        {
+            using (var ctx = new MovieContext())
+            {
+                foreach (Director d in directors)
+                {
+                    ctx.Director.Add(d);
+                    ctx.SaveChanges();
+                }
+
+            }
+            InitializeDirectorsListBox();
+
+        }
         public void InitializeDirectorsListBox()
         {
             DirectorListBox.Items.Clear();
@@ -279,34 +196,33 @@ namespace FinaiProejct_200OK
         public void InitializeGenresListBox()
         {
             GenreListBox.Items.Clear();
-            List<string> genresList;
             using (var ctx = new MovieContext())
             {
-                genresList = ctx.Genre.Select(x => x.GenreName).ToList();
-            }
-            
-            foreach (var c in genresList)
-            {
-                try
+                var genreDB = ctx.Genre.ToList().Distinct();
+                foreach (var c in genreDB)
                 {
-                    ListViewItem l = new ListViewItem();
-                    l.Content = c;
-                    GenreListBox.Items.Add(l);
+                    try
+                    {
+                        ListViewItem l = new ListViewItem();
+                        l.Content = c;
+                        GenreListBox.Items.Add(l);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
                 }
-                catch (Exception e)
-                {
-                    MessageBox.Show(e.Message);
-                }
+
             }
+
         }
-            
 
         private void SubLoginButtonClick(Object o, EventArgs e)
         {
             using (var ctx = new MovieContext())
             {
                 var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).First();
-              
+
                 if (loginPage.PasswordTextBox.Text == user.getPassword().Trim())
                 {
                     myUser = user;
@@ -324,21 +240,20 @@ namespace FinaiProejct_200OK
                 {
                     loginPage.HintTextBlock.Visibility = Visibility.Visible;
                     loginPage.HintTextBlock.Text = "Wrong input information";
-                }                
+                }
             }
-            
         }
 
         private void LogOutButtonClick(Object o, EventArgs e)
         {
-                    
+
             myUser = null;
             LogoutButton.Visibility = Visibility.Hidden;
             LoginButton.Visibility = Visibility.Visible;
             CreateButton.Visibility = Visibility.Visible;
             AccountTextBlock.Text = "";
             AccountTextBlock.Visibility = Visibility.Hidden;
-            
+
         }
 
         private void SubCreateButtonClick(Object o, EventArgs e)
@@ -346,7 +261,8 @@ namespace FinaiProejct_200OK
             if (createPage.CreateUserNameTextBox.Text.Length == 0 || createPage.CreatePasswordTextBox.Text.Length == 0)
             {
                 createPage.CreateHintTextBlock.Text = "Please input both user name and password";
-            } else
+            }
+            else
             {
                 using (var ctx = new MovieContext())
                 {
@@ -368,7 +284,7 @@ namespace FinaiProejct_200OK
                     }
                 }
             }
-            
+
         }
 
         private void PopulateMovie()
@@ -379,7 +295,6 @@ namespace FinaiProejct_200OK
                 movies = ctx.Movie.ToList();
                 /*foreach (Movie m in movies)
                 {
-
                     *//*MovieTempForList currentMovie = new MovieTempForList();
                     currentMovie.MovieTitle = m.MovieTitle;
                     currentMovie.ReleaseDate = m.ReleaseDate;
@@ -387,10 +302,9 @@ namespace FinaiProejct_200OK
                     currentMovie.MovieGenres = m.Genres[0].ToString() + "; " + m.Genres[1].ToString();
                     MovieDataGrid.Items.Add(currentMovie);*//*
                     MovieDataGrid.Items.Add(m);
-
                 }*/
                 MovieDataGrid.ItemsSource = movies;
-            }            
+            }
         }
 
         private void InitializeMovieGrid()
@@ -403,23 +317,23 @@ namespace FinaiProejct_200OK
             movieReleaseDateColumn.Header = "Release Date";
             movieReleaseDateColumn.Binding = new Binding("ReleaseDate");
             movieReleaseDateColumn.Binding.StringFormat = "dd/MM/yyyy";
-            
+
 
             DataGridTextColumn genreColumn = new DataGridTextColumn();
-            genreColumn.Header = "Genre";            
+            genreColumn.Header = "Genre";
 
             DataGridTextColumn directorColumn = new DataGridTextColumn();
-            directorColumn.Header = "Director";            
+            directorColumn.Header = "Director";
 
             MovieDataGrid.Columns.Add(movieTitleColumn);
             MovieDataGrid.Columns.Add(movieReleaseDateColumn);
             MovieDataGrid.Columns.Add(genreColumn);
             MovieDataGrid.Columns.Add(directorColumn);
         }
-        
+
         private void ReadDataToDatabase()
         {
-            
+
             using (var ctx = new MovieContext())
             {
                 // First from director                
@@ -458,12 +372,12 @@ namespace FinaiProejct_200OK
                     for (int i = 0; i < 5; i++)
                     {
                         List<Genre> myGenres = new List<Genre>();
-                        myGenres.Add(ctx.Genre.ToList()[i]);                        
+                        myGenres.Add(ctx.Genre.ToList()[i]);
                         myGenres.Add(ctx.Genre.ToList()[(i + 2) % 5]);
-                       // movieList[i].Genres = myGenres;                        
+                        // movieList[i].Genres = myGenres;                        
                         //movieList[i].MovieDirector = ctx.Director.ToList()[i];
                         ctx.Movie.Add(movieList[i]);
-                        
+
                     }
                 }
 
@@ -479,8 +393,8 @@ namespace FinaiProejct_200OK
             public string MovieGenres { get; set; }
         }
 
-        
 
-        
+
+
     }
 }
