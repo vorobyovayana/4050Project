@@ -264,25 +264,27 @@ namespace FinaiProejct_200OK
 
         private void PopulateMovie()
         {
-            MovieDataGrid.Items.Clear();
+            //MovieDataGrid.Items.Clear();
             using (var ctx = new MovieContext())
             {
                 movies = ctx.Movie.ToList();
-                foreach (Movie m in movies)
+                /*foreach (Movie m in movies)
                 {
-                    
-                    MovieTempForList currentMovie = new MovieTempForList();
+
+                    *//*MovieTempForList currentMovie = new MovieTempForList();
                     currentMovie.MovieTitle = m.MovieTitle;
                     currentMovie.ReleaseDate = m.ReleaseDate;
-                    //currentMovie.MovieDirector = m.MovieDirector.ToString();                    
-                    //currentMovie.MovieGenres = m.Genres[0].ToString() + "; " + m.Genres[1].ToString();
-                    MovieDataGrid.Items.Add(currentMovie);
+                    currentMovie.MovieDirector = m.MovieDirector.ToString();                    
+                    currentMovie.MovieGenres = m.Genres[0].ToString() + "; " + m.Genres[1].ToString();
+                    MovieDataGrid.Items.Add(currentMovie);*//*
+                    MovieDataGrid.Items.Add(m);
 
-                }
+                }*/
+                MovieDataGrid.ItemsSource = movies;
             }            
         }
 
-        /*private void InitializeMovieGrid()
+        private void InitializeMovieGrid()
         {
             DataGridTextColumn movieTitleColumn = new DataGridTextColumn();
             movieTitleColumn.Header = "Movie Title";
@@ -292,10 +294,6 @@ namespace FinaiProejct_200OK
             movieReleaseDateColumn.Header = "Release Date";
             movieReleaseDateColumn.Binding = new Binding("ReleaseDate");
             movieReleaseDateColumn.Binding.StringFormat = "dd/MM/yyyy";
-
-            *//*DataGridTextColumn reviewColumn = new DataGridTextColumn();
-            reviewColumn.Header = "Review";
-            reviewColumn.Binding = new Binding("Reviews");*//*
             
 
             DataGridTextColumn genreColumn = new DataGridTextColumn();
@@ -306,10 +304,9 @@ namespace FinaiProejct_200OK
 
             MovieDataGrid.Columns.Add(movieTitleColumn);
             MovieDataGrid.Columns.Add(movieReleaseDateColumn);
-            *//*MovieDataGrid.Columns.Add(reviewColumn);*//*
             MovieDataGrid.Columns.Add(genreColumn);
             MovieDataGrid.Columns.Add(directorColumn);
-        }*/
+        }
         
         private void ReadDataToDatabase()
         {

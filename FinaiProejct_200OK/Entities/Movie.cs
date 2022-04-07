@@ -23,5 +23,12 @@ namespace FinaiProejct_200OK.Entities
 
         public IMDBData imdbData { get; set; }
 
+        public Movie( string movieTitle, DateTime releaseDate, int genreId, int directorId)
+        {
+            GenreId = genreId;
+            DirectorId = directorId;
+            MovieTitle = movieTitle;
+            ReleaseDate = releaseDate;
+        }
     }
 }
