@@ -10,7 +10,7 @@
         <DataGrid Name="MovieDataGrid" HorizontalAlignment="Left" Height="220" Margin="212,124,0,0" VerticalAlignment="Top" Width="362" IsReadOnly="True"/>
         <ListBox Name="GenreListBox" HorizontalAlignment="Left" Height="179" Margin="620,124,0,0" VerticalAlignment="Top" Width="132" RenderTransformOrigin="-0.4,0.236"/>
         <ListBox Name="DirectorListBox" HorizontalAlignment="Left" Height="179" Margin="48,124,0,0" VerticalAlignment="Top" Width="115"/>
-        <TextBox Name="SearchTextBox" HorizontalAlignment="Left" Height="20" Margin="259,31,0,0" TextWrapping="Wrap" Text="TextBox" VerticalAlignment="Top" Width="269"/>
+        <TextBox Name="SearchTextBox" HorizontalAlignment="Left" Height="20" Margin="259,31,0,0" TextWrapping="Wrap"  VerticalAlignment="Top" Width="269"/>
         <Button Name="LoginButton" Content="LogIn" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="LogoutButton" Content="LogOut" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
         <Button Name="FavoritesButton" Content="Go to Favorites" HorizontalAlignment="Left" Margin="656,362,0,0" VerticalAlignment="Top" Width="75"/>

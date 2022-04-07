@@ -41,6 +41,8 @@ namespace FinaiProejct_200OK
         DirectorParser dp = new DirectorParser();
         GenreParser gp = new GenreParser();
 
+        List<MovieTempForList> tempMovieList;
+
         string directorFileName = "";
         string genreFileName = "";
 
@@ -82,6 +84,7 @@ namespace FinaiProejct_200OK
 
                 AddGenreBtn.Click += selectGenreFile;
                 AddDirectorBtn.Click += selectDirectorFile;
+                SearchTextBox.TextChanged += SearchInput;
 
             }
         }
@@ -293,13 +296,13 @@ namespace FinaiProejct_200OK
             using (var ctx = new MovieContext())
             {
                 movies = ctx.Movie.ToList();
-                List<MovieTempForList> tempMovieList = new List<MovieTempForList>();
+                tempMovieList = new List<MovieTempForList>();
                 foreach (Movie m in movies)
                 {
                     MovieTempForList currentMovie = new MovieTempForList();
                     currentMovie.MovieId = m.MovieId;
                     currentMovie.MovieTitle = m.MovieTitle;
-                    currentMovie.ReleaseDate = m.ReleaseDate;
+                    currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
                     currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
                     currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
                     tempMovieList.Add(currentMovie);
@@ -308,7 +311,32 @@ namespace FinaiProejct_200OK
             }
         }
 
-        private void InitializeMovieGrid()
+        private void SearchInput(Object o, EventArgs e)
+        {
+            
+            string input = SearchTextBox.Text;
+            using (var ctx = new MovieContext())
+            {
+                movies = ctx.Movie.ToList();
+                List<MovieTempForList> tempMovieListFull = new List<MovieTempForList>();
+                foreach (Movie m in movies)
+                {
+                    MovieTempForList currentMovie = new MovieTempForList();
+                    currentMovie.MovieId = m.MovieId;
+                    currentMovie.MovieTitle = m.MovieTitle;
+                    currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
+                    currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
+                    currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
+                    tempMovieListFull.Add(currentMovie);
+                }
+                tempMovieList = tempMovieListFull.Where(x => x.MovieDirector.Contains(input) || x.MovieGenres.Contains(input) || x.MovieTitle.Contains(input)
+                || x.MovieId.ToString().Contains(input) || x.ReleaseDate.ToString().Contains(input))
+                    .ToList();                
+            }
+            MovieDataGrid.ItemsSource = tempMovieList;
+        }
+
+        /*private void InitializeMovieGrid()
         {
             DataGridTextColumn movieTitleColumn = new DataGridTextColumn();
             movieTitleColumn.Header = "Movie Title";
@@ -330,7 +358,7 @@ namespace FinaiProejct_200OK
             MovieDataGrid.Columns.Add(movieReleaseDateColumn);
             MovieDataGrid.Columns.Add(genreColumn);
             MovieDataGrid.Columns.Add(directorColumn);
-        }
+        }*/
 
         private void ReadDataToDatabase()
         {
@@ -390,7 +418,7 @@ namespace FinaiProejct_200OK
         {
             public int MovieId { get; set; }
             public string MovieTitle { get; set; }
-            public DateTime ReleaseDate { get; set; }
+            public string ReleaseDate { get; set; }
             public string MovieDirector { get; set; }
             public string MovieGenres { get; set; }
         }
