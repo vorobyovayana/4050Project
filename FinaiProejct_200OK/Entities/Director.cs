@@ -20,9 +20,9 @@ namespace FinaiProejct_200OK.Entities
 
         }
 
-        /*public override string ToString()
+        public override string ToString()
         {
             return DirectorName;
-        }*/
+        }
     }
 }

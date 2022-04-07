@@ -293,17 +293,18 @@ namespace FinaiProejct_200OK
             using (var ctx = new MovieContext())
             {
                 movies = ctx.Movie.ToList();
-                /*foreach (Movie m in movies)
+                List<MovieTempForList> tempMovieList = new List<MovieTempForList>();
+                foreach (Movie m in movies)
                 {
-                    *//*MovieTempForList currentMovie = new MovieTempForList();
+                    MovieTempForList currentMovie = new MovieTempForList();
+                    currentMovie.MovieId = m.MovieId;
                     currentMovie.MovieTitle = m.MovieTitle;
                     currentMovie.ReleaseDate = m.ReleaseDate;
-                    currentMovie.MovieDirector = m.MovieDirector.ToString();                    
-                    currentMovie.MovieGenres = m.Genres[0].ToString() + "; " + m.Genres[1].ToString();
-                    MovieDataGrid.Items.Add(currentMovie);*//*
-                    MovieDataGrid.Items.Add(m);
-                }*/
-                MovieDataGrid.ItemsSource = movies;
+                    currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
+                    currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
+                    tempMovieList.Add(currentMovie);
+                }
+                MovieDataGrid.ItemsSource = tempMovieList;
             }
         }
 
@@ -387,6 +388,7 @@ namespace FinaiProejct_200OK
 
         private class MovieTempForList
         {
+            public int MovieId { get; set; }
             public string MovieTitle { get; set; }
             public DateTime ReleaseDate { get; set; }
             public string MovieDirector { get; set; }
