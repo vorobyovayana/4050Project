@@ -181,9 +181,9 @@
     <Compile Include="Login.xaml.cs">
       <DependentUpon>Login.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20220406080035_init.cs" />
-    <Compile Include="Migrations\20220406080035_init.designer.cs">
-      <DependentUpon>20220406080035_init.cs</DependentUpon>
+    <Compile Include="Migrations\20220407050003_init.cs" />
+    <Compile Include="Migrations\20220407050003_init.designer.cs">
+      <DependentUpon>20220407050003_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
     <Compile Include="Utilities\MovieParser.cs" />

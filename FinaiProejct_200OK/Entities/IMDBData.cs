@@ -12,7 +12,6 @@ namespace FinaiProejct_200OK.Entities
     {
         
         [Key]
-        [ForeignKey("Movie")]
         public int MovieId { get; set; }
         public string imdbPath { get; set; }
     }

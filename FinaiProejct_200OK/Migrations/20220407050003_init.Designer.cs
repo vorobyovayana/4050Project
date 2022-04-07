@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinaiProejct_200OK.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20220406080035_init")]
+    [Migration("20220407050003_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -72,9 +72,7 @@ namespace FinaiProejct_200OK.Migrations
             modelBuilder.Entity("FinaiProejct_200OK.Entities.IMDBData", b =>
                 {
                     b.Property<int>("MovieId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
+                        .HasColumnType("int");
 
                     b.Property<string>("imdbPath")
                         .HasColumnType("nvarchar(max)");
@@ -160,6 +158,15 @@ namespace FinaiProejct_200OK.Migrations
                     b.HasOne("FinaiProejct_200OK.Entities.User", null)
                         .WithMany("Favorites")
                         .HasForeignKey("UserId");
+                });
+
+            modelBuilder.Entity("FinaiProejct_200OK.Entities.IMDBData", b =>
+                {
+                    b.HasOne("FinaiProejct_200OK.Entities.Movie", null)
+                        .WithOne("imdbData")
+                        .HasForeignKey("FinaiProejct_200OK.Entities.IMDBData", "MovieId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FinaiProejct_200OK.Entities.Movie", b =>

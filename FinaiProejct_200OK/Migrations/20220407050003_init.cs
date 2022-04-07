@@ -34,19 +34,6 @@ namespace FinaiProejct_200OK.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "IMDBData",
-                columns: table => new
-                {
-                    MovieId = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:Identity", "1, 1"),
-                    imdbPath = table.Column<string>(nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_IMDBData", x => x.MovieId);
-                });
-
-            migrationBuilder.CreateTable(
                 name: "User",
                 columns: table => new
                 {
@@ -105,6 +92,24 @@ namespace FinaiProejct_200OK.Migrations
                         principalTable: "User",
                         principalColumn: "UserId",
                         onDelete: ReferentialAction.Restrict);
+                });
+
+            migrationBuilder.CreateTable(
+                name: "IMDBData",
+                columns: table => new
+                {
+                    MovieId = table.Column<int>(nullable: false),
+                    imdbPath = table.Column<string>(nullable: true)
+                },
+                constraints: table =>
+                {
+                    table.PrimaryKey("PK_IMDBData", x => x.MovieId);
+                    table.ForeignKey(
+                        name: "FK_IMDBData_Movie_MovieId",
+                        column: x => x.MovieId,
+                        principalTable: "Movie",
+                        principalColumn: "MovieId",
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(

@@ -21,5 +21,7 @@ namespace FinaiProejct_200OK.Entities
 
         public List<Review> Reviews { get; set; }
 
+        public IMDBData imdbData { get; set; }
+
     }
 }
