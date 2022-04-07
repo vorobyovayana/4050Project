@@ -60,14 +60,74 @@ namespace FinaiProejct_200OK
 
 
             InitializeDirectorsListBox();
+            
+        }
+
+        private void selectDirectorFile(object o, EventArgs e)
+        {
+            if (o.Equals(AddDirectorBtn))
+            {
+                OpenFileDialog openFileDialogue = new OpenFileDialog();
+                // Only show user the Data folder with only "directors.csv" file in it
+                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
+                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
+                openFileDialogue.Filter = "CSV Files(directors.csv)|directors.csv";
+                openFileDialogue.RestoreDirectory = true;
+
+                Nullable<bool> result = openFileDialogue.ShowDialog();
+
+                if (result == true)
+                {
+                    directorFileName = openFileDialogue.FileName;
+                }
+                else
+                {
+                    return;
+                }
+                List<Director> loadDirectorsList = DirectorParser.ParseDirector(fs.ReadFile(directorFileName));
+                uploadDirectors();
+            }
+        }
+
+        private void selectGenreFile(object o, EventArgs e)
+        {
+            if (o.Equals(AddGenresBtn))
+            {
+                OpenFileDialog openFileDialogue = new OpenFileDialog();
+                // Only show user the Data folder with only "directors.csv" file in it
+                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
+                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
+                openFileDialogue.Filter = "CSV Files(genres.csv)|genres.csv";
+                openFileDialogue.RestoreDirectory = true;
+
+                Nullable<bool> result = openFileDialogue.ShowDialog();
+                if (result == true)
+                {
+                    genreFileName = openFileDialogue.FileName;
+                }
+                else
+                {
+                    return;
+                }
+                List<Genre> loadGenreList = GenreParser.ParseGenre(fs.ReadFile(genreFileName));
+                genres.AddRange(loadGenreList);
+                uploadGenres();
+
+            }
+        }
+
+        public void uploadGenres()
+        {
+            using (var ctx = new MovieContext())
+            {
+                foreach (Genre g in genres)
+                {
+                    ctx.Genre.Add(g);
+                    ctx.SaveChanges();
+                }
+
+            }
             InitializeGenresListBox();
-            PopulateMovie();
-            movieGrid = MovieDataGrid;
-
-            toggleEvent(true);
-
-            
-            
         }
 
         private void toggleEvent(bool toggle)
@@ -93,7 +153,7 @@ namespace FinaiProejct_200OK
 
         private void selectDirectorFile(object o, EventArgs e)
         {
-            if (o.Equals(AddDirectorsBtn))
+            if (o.Equals(AddDirectorBtn))
             {
                 OpenFileDialog openFileDialogue = new OpenFileDialog();
                 // Only show user the Data folder with only "directors.csv" file in it
@@ -103,6 +163,30 @@ namespace FinaiProejct_200OK
                 openFileDialogue.RestoreDirectory = true;
 
                 Nullable<bool> result = openFileDialogue.ShowDialog();
+
+                if (result == true)
+                {
+                    directorFileName = openFileDialogue.FileName;
+                }
+                else
+                {
+                    return;
+                }
+                List<Director> loadDirectorsList = DirectorParser.ParseDirector(fs.ReadFile(directorFileName));
+                uploadDirectors();
+            }
+        }
+        public void uploadDirectors()
+        {
+            using (var ctx = new MovieContext())
+            {
+                foreach (Director d in directors)
+                {
+                    ctx.Director.Add(d);
+                    ctx.SaveChanges();
+                }
+                InitializeDirectorsListBox();
+             }
 
                 if (result == true)
                 {
@@ -168,6 +252,29 @@ namespace FinaiProejct_200OK
                 }
             }
         }
+           
+
+        public void InitializeDirectorsListBox()
+        {
+            DirectorListBox.Items.Clear();
+            using (var ctx = new MovieContext())
+            {
+                var directorDB = ctx.Director.ToList().Distinct();
+                foreach (var c in directorDB)
+                {
+                    try
+                    {
+                        ListViewItem l = new ListViewItem();
+                        l.Content = c;
+                        DirectorListBox.Items.Add(l);
+                    }
+                    catch (Exception e)
+                    {
+                        MessageBox.Show(e.Message);
+                    }
+                }
+            }
+        }
 
         public void InitializeGenresListBox()
         {
@@ -192,6 +299,7 @@ namespace FinaiProejct_200OK
                 }
             }
         }
+            
 
         private void SubLoginButtonClick(Object o, EventArgs e)
         {
@@ -218,6 +326,7 @@ namespace FinaiProejct_200OK
                     loginPage.HintTextBlock.Text = "Wrong input information";
                 }                
             }
+            
         }
 
         private void LogOutButtonClick(Object o, EventArgs e)
