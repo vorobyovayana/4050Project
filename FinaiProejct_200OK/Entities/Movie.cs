@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinaiProejct_200OK.Entities
 {
-    class Movie
+    public class Movie
     {
         [Key]
         public int MovieId { get; set; }
@@ -30,5 +30,7 @@ namespace FinaiProejct_200OK.Entities
             MovieTitle = movieTitle;
             ReleaseDate = releaseDate;
         }
+
+        public Movie() { }
     }
 }

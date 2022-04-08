@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinaiProejct_200OK.Entities
 {
-    class Review
+    public class Review
     {
         [Key]
         public int ReviewId { get; set; }

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace FinaiProejct_200OK.Entities
 {
-    class IMDBData
+    public class IMDBData
     {
         
         [Key]
