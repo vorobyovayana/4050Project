@@ -25,7 +25,7 @@ namespace FinaiProejct_200OK.Utilities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Favorite>()
-                .HasKey(c => new { c.MemberId, c.MovieId });
+                .HasKey(c => new { c.UserId, c.MovieId });
 
         }
     }

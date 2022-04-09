@@ -13,7 +13,6 @@
         <ListBox Name="GenreListBox" HorizontalAlignment="Left" Height="179" Margin="620,124,0,0" VerticalAlignment="Top" Width="132" RenderTransformOrigin="-0.4,0.236"/>
         <ListBox Name="DirectorListBox" HorizontalAlignment="Left" Height="179" Margin="48,124,0,0" VerticalAlignment="Top" Width="115"/>
         <TextBox Name="SearchTextBox" HorizontalAlignment="Left" Height="20" Margin="259,31,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="269"/>
-        <Button Name="FavoritesButton" Content="Go to Favorites" HorizontalAlignment="Left" Margin="656,362,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content ="Directors" HorizontalAlignment="Left" Margin="72,83,0,0" VerticalAlignment="Top"/>
         <Label Content="Genres" HorizontalAlignment="Left" Margin="656,91,0,0" VerticalAlignment="Top"/>
         <Label x:Name="Great" Content="" HorizontalAlignment="Left" Margin="620,32,0,0" VerticalAlignment="Top"/>
@@ -23,5 +22,9 @@
         <Button Name="AddMovieButton" Content="Add Movie" HorizontalAlignment="Left" Margin="224,362,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="EditMovieButton" Content="Edit Movie" HorizontalAlignment="Left" Margin="343,362,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="DeleteMovieButton" Content="Delete Movie" HorizontalAlignment="Left" Margin="453,362,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="FavoritesButton" Content="My Favorites List" HorizontalAlignment="Left" Margin="656,362,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="CreateButton" HorizontalAlignment="Left" Content="Create Account" Margin="656,17,0,0" VerticalAlignment="Top" Width="87" />
+        <Button Name="LoginButton" Content="LogIn" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="LogoutButton" Content="LogOut" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
     </Grid>
 </Page>

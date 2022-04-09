@@ -26,6 +26,7 @@ namespace FinaiProejct_200OK
     {
         Movie movie;
         User user;
+        bool isFav;
         public Detail(){ InitializeComponent();  }
         public Detail(Movie m, User u)
         {
@@ -33,19 +34,55 @@ namespace FinaiProejct_200OK
             movie = m;
             user = u;
             getData();
-            isFavorite();
             AddReview.Click += addReviewEvent;
+            FavoriteBtn.Click += FavEvent;
+            isFav =isFavorite();
         }
-
-        private void isFavorite()
+        private void FavEvent(object o, EventArgs e)
+        {
+            if (isFav)
+            {
+                using (var ctx = new MovieContext())
+                {
+                    ctx.Favorite.Remove(ctx.Favorite.Where(x => x.MovieId == movie.MovieId && x.UserId == user.UserId).FirstOrDefault());
+                    ctx.SaveChanges();
+                }
+                isFav = isFavorite();
+            }
+            else 
+            {
+                using (var ctx = new MovieContext())
+                {
+                    Favorite temp = new Favorite();
+                    temp.MovieId = movie.MovieId;
+                    temp.UserId = user.UserId;
+                    ctx.Favorite.Add(temp);
+                    ctx.SaveChanges();
+                }
+                isFav = isFavorite();
+            }
+        }
+        private bool isFavorite()
         {
             using (var ctx = new MovieContext())
             {
-                var favorite = ctx.Favorite.Where(x => x.MovieId == movie.MovieId && x.MemberId==user.UserId).FirstOrDefault();
-                if (favorite == null) 
-                { 
-                    
+                if (user == null) 
+                {
+                    FavoriteBtn.Visibility = Visibility.Hidden;
+                    return false;
                 }
+
+                var favorite = ctx.Favorite.Where(x => x.MovieId == movie.MovieId && x.UserId==user.UserId).FirstOrDefault();
+                if (favorite != null)
+                {
+                    FavoriteBtn.Content = "Delete for my favorite list";
+                    return true;
+                }
+                else {
+                    FavoriteBtn.Content = "Add to my favorite list";
+                    return false;
+                }
+                return false;
             }
         }
 

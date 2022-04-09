@@ -11,14 +11,14 @@ namespace FinaiProejct_200OK.Entities
     {
         [Key]
         [Required]
-        public int MemberId { get; set; }
+        public int UserId { get; set; }
         [Key]
         [Required]
         public int MovieId { get; set; }
 
         public Favorite(int memberId, int movieId)
         {
-            MemberId = memberId;
+            UserId = memberId;
             MovieId = movieId;
         }
         public Favorite() { }

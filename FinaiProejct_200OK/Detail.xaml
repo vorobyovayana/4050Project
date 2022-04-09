@@ -15,7 +15,7 @@
         <TextBlock x:Name="MovieName"  HorizontalAlignment="Left" Margin="166,13,0,0" TextWrapping="Wrap" Text="Movie Name" VerticalAlignment="Top"/>
         <TextBlock x:Name="Review"  HorizontalAlignment="Left" Margin="314,10,0,0" TextWrapping="Wrap" Text="Review" VerticalAlignment="Top"/>
         <Button x:Name="CloseBnt" Content="Back" HorizontalAlignment="Left" Margin="702,355,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="favorite" Content="Add to my favorite" HorizontalAlignment="Left" Margin="142,355,0,0" VerticalAlignment="Top" Width="106"/>
+        <Button x:Name="FavoriteBtn" Content="Add to my favorite list" HorizontalAlignment="Left" Margin="142,355,0,0" VerticalAlignment="Top" Width="144"/>
         <Image x:Name="MoiveImg" HorizontalAlignment="Left" Height="115" Margin="42,41,0,0" VerticalAlignment="Top" Width="206"/>
         <StackPanel x:Name="stackPanel" HorizontalAlignment="Left" Height="200" Margin="314,41,0,0" VerticalAlignment="Top" Width="300">
 

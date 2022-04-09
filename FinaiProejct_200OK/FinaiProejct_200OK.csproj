@@ -212,6 +212,10 @@
     <Compile Include="Migrations\20220408225017_addCol.designer.cs">
       <DependentUpon>20220408225017_addCol.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220409063232_deleteMemberId.cs" />
+    <Compile Include="Migrations\20220409063232_deleteMemberId.designer.cs">
+      <DependentUpon>20220409063232_deleteMemberId.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
     <Compile Include="MovieEditionPage.xaml.cs">
       <DependentUpon>MovieEditionPage.xaml</DependentUpon>

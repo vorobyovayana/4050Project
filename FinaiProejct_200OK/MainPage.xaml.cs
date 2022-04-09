@@ -79,8 +79,6 @@ namespace FinaiProejct_200OK
             InitializeDirectorsListBox();
             InitializeGenresListBox();
             PopulateMovie();
-            
-
             toggleEvent(true);
         }
         private void SearchInput(Object o, EventArgs e)
@@ -121,14 +119,11 @@ namespace FinaiProejct_200OK
                 AddMovieButton.Click += AddMovieButtonClick;
                 EditMovieButton.Click += EditMovieButtonClick;
                 DeleteMovieButton.Click += DeleteMovieButtonClick;
-
                 SearchTextBox.TextChanged += SearchTextInput;
-                
-
-
-
             }
         }
+
+
 
         private void WindowClosed(Object o, EventArgs e)
         {

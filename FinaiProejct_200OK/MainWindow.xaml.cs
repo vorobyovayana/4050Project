@@ -47,9 +47,13 @@ namespace FinaiProejct_200OK
                 LoginButton.Click += LoginButtonClick;
                 LogoutButton.Click += LogOutButtonClick;
                 CreateButton.Click += CreateButtonClick;
+                FavoritesButton.Click += GoToFavList;
             }
         }
-
+        private void GoToFavList(object sender, RoutedEventArgs e)
+        {
+            frame.Navigate(new CreateAccount());
+        }
         private void toggleVisible(bool toggle)
         {
             if (toggle)
