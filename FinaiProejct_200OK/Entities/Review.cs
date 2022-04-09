@@ -15,9 +15,8 @@ namespace FinaiProejct_200OK.Entities
         public int UserId { get; set; }
         public string ReviewDesc { get; set; }
 
-        public Review(int reviewId, int movieId,int userId, string reviewDesc)
+        public Review( int movieId,int userId, string reviewDesc)
         {
-            ReviewId = reviewId;
             MovieId = movieId;
             ReviewDesc = reviewDesc;
         }

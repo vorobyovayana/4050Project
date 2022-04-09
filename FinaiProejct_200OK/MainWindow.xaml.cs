@@ -35,7 +35,7 @@ namespace FinaiProejct_200OK
             InitializeComponent();
             mainWindow = Window.GetWindow(this) as MainWindow;
             Frame frame = (Frame)mainWindow.FindName("frame");
-            frame.Navigate(new MainPage());
+            frame.Navigate(new PrePage());
             
 
         }

@@ -223,7 +223,11 @@
     <Compile Include="MovieEditionPage.xaml.cs">
       <DependentUpon>MovieEditionPage.xaml</DependentUpon>
     </Compile>
+    <Compile Include="PrePage.xaml.cs">
+      <DependentUpon>PrePage.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Utilities\MovieParser.cs" />
+    <Compile Include="Utilities\IMDBParser.cs" />
     <Compile Include="Utilities\UserParser.cs" />
     <Compile Include="Utilities\DirectorParser.cs" />
     <Compile Include="Utilities\Encrypt.cs" />
@@ -278,6 +282,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="PrePage.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -297,6 +305,7 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
+    <None Include="Data\IMDB.csv" />
     <None Include="Data\favorites.csv" />
     <None Include="Data\reviews.csv" />
     <None Include="Data\directors.csv" />

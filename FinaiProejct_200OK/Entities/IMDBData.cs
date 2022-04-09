@@ -15,5 +15,12 @@ namespace FinaiProejct_200OK.Entities
         public int MovieId { get; set; }
         public string imdbPath { get; set; }
         public string posterPath { get; set; }
+
+        public IMDBData(int movieId, string imdbPath, string posterPath)
+        {
+            MovieId = movieId;
+            this.imdbPath = imdbPath;
+            this.posterPath = posterPath;
+        }
     }
 }

@@ -11,22 +11,22 @@
 
     <Grid>
         <TextBlock x:Name="Title"  HorizontalAlignment="Left" Margin="42,10,0,0" TextWrapping="Wrap" Text="Movie Name" VerticalAlignment="Top"/>
-        <TextBlock x:Name="Description"  HorizontalAlignment="Left" Margin="42,277,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Height="60" Width="195"/>
+        <TextBlock x:Name="DescriptionTxt"  HorizontalAlignment="Left" Margin="42,228,0,0" TextWrapping="Wrap" Text="Description" VerticalAlignment="Top" Height="75" Width="206"/>
         <TextBlock x:Name="MovieName"  HorizontalAlignment="Left" Margin="166,13,0,0" TextWrapping="Wrap" Text="Movie Name" VerticalAlignment="Top"/>
         <TextBlock x:Name="Review"  HorizontalAlignment="Left" Margin="314,10,0,0" TextWrapping="Wrap" Text="Review" VerticalAlignment="Top"/>
-        <Button x:Name="CloseBtn" Content="Back" HorizontalAlignment="Left" Margin="702,355,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button x:Name="FavoriteBtn" Content="Add to my favorite list" HorizontalAlignment="Left" Margin="142,355,0,0" VerticalAlignment="Top" Width="144"/>
+        <Button x:Name="CloseBtn" Content="Back" HorizontalAlignment="Left" Margin="685,325,0,0" VerticalAlignment="Top" Width="75" RenderTransformOrigin="0.467,1.7"/>
+        <Button x:Name="FavoriteBtn" Content="Add to my favorite list" HorizontalAlignment="Left" Margin="42,330,0,0" VerticalAlignment="Top" Width="144"/>
         <Image x:Name="MoiveImg" HorizontalAlignment="Left" Height="115" Margin="42,41,0,0" VerticalAlignment="Top" Width="206"/>
-        <StackPanel x:Name="stackPanel" HorizontalAlignment="Left" Height="200" Margin="314,41,0,0" VerticalAlignment="Top" Width="300">
+        <StackPanel x:Name="stackPanel" HorizontalAlignment="Left" Height="92" Margin="314,41,0,0" VerticalAlignment="Top" Width="324">
 
         </StackPanel>
-        <Grid x:Name="ReviewGrid" Margin="321,254,103,37">
-            <TextBlock HorizontalAlignment="Left" Margin="10,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="114"><Run Text="Add your review"/><Run Text=":"/></TextBlock>
-            <TextBox x:Name="reviewDesc" HorizontalAlignment="Left" Height="88" Margin="114,10,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235" Grid.ColumnSpan="2"/>
-            <Button x:Name="AddReview" Content="Add Review" HorizontalAlignment="Left" Margin="274,103,0,0" VerticalAlignment="Top" Width="75"/>
+        <Grid x:Name="ReviewGrid" Margin="314,238,120,90">
+            <TextBlock HorizontalAlignment="Left" Margin="0,2,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Height="17" Width="114"><Run Text="Add your review"/><Run Text=":"/></TextBlock>
+            <TextBox x:Name="reviewDesc" HorizontalAlignment="Left" Height="88" Margin="0,24,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="235"/>
+            <Button x:Name="AddReview" Content="Add Review" HorizontalAlignment="Left" Margin="281,93,0,0" VerticalAlignment="Top" Width="75"/>
 
         </Grid>
-        <TextBlock Margin="42,183,566,196" >
+        <TextBlock Margin="42,183,576,246" >
              <Hyperlink NavigateUri="{Binding}" RequestNavigate="HandleLinkClick">See More on IMDB</Hyperlink>
         </TextBlock>
     </Grid>

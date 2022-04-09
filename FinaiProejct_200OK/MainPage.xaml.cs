@@ -41,10 +41,6 @@ namespace FinaiProejct_200OK
         List<Movie> movies;
         User u = new User();
         FileService fs = new FileService();
-        DirectorParser dp = new DirectorParser();
-        GenreParser gp = new GenreParser();
-        string directorFileName = "";
-        string genreFileName = "";
        
         
 
@@ -170,8 +166,6 @@ namespace FinaiProejct_200OK
                 //CreateButton.Click += CreateButtonClick;
                 //createPage.SubCreateButton.Click += SubCreateButtonClick;
 
-                AddGenreBtn.Click += selectGenreFile;
-                AddDirectorBtn.Click += selectDirectorFile;
                 MovieDataGrid.MouseDoubleClick += DataGridCellMouseDoubleClick;
                 AddMovieButton.Click += AddMovieButtonClick;
                 EditMovieButton.Click += EditMovieButtonClick;
@@ -250,59 +244,9 @@ namespace FinaiProejct_200OK
 
 
 
-        private void selectDirectorFile(object o, EventArgs e)
-        {
-            if (o.Equals(AddDirectorBtn))
-            {
-                OpenFileDialog openFileDialogue = new OpenFileDialog();
-                // Only show user the Data folder with only "directors.csv" file in it
-                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
-                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
-                openFileDialogue.Filter = "CSV Files(directors.csv)|directors.csv";
-                openFileDialogue.RestoreDirectory = true;
+       
 
-                Nullable<bool> result = openFileDialogue.ShowDialog();
-
-                if (result == true)
-                {
-                    directorFileName = openFileDialogue.FileName;
-                }
-                else
-                {
-                    return;
-                }
-                List<Director> loadDirectorsList = DirectorParser.ParseDirector(fs.ReadFile(directorFileName));
-                uploadDirectors();
-            }
-        }
-
-        private void selectGenreFile(object o, EventArgs e)
-        {
-            if (o.Equals(AddGenreBtn))
-            {
-                OpenFileDialog openFileDialogue = new OpenFileDialog();
-                // Only show user the Data folder with only "directors.csv" file in it
-                string CombinedPath = System.IO.Path.Combine(Directory.GetCurrentDirectory(), "..\\..\\Data");
-                openFileDialogue.InitialDirectory = System.IO.Path.GetFullPath(CombinedPath);
-                openFileDialogue.Filter = "CSV Files(genres.csv)|genres.csv";
-                openFileDialogue.RestoreDirectory = true;
-
-                Nullable<bool> result = openFileDialogue.ShowDialog();
-                if (result == true)
-                {
-                    genreFileName = openFileDialogue.FileName;
-                }
-                else
-                {
-                    return;
-                }
-                List<Genre> loadGenreList = GenreParser.ParseGenre(fs.ReadFile(genreFileName));
-                genres.AddRange(loadGenreList);
-                uploadGenres();
-
-            }
-        }
-        public void uploadGenres()
+       /* public void uploadGenres()
         {
             using (var ctx = new MovieContext())
             {
@@ -329,7 +273,7 @@ namespace FinaiProejct_200OK
             }
             InitializeDirectorsListBox();
 
-        }
+        }*/
         public void InitializeDirectorsListBox()
         {
             DirectorListBox.Items.Clear();
@@ -544,8 +488,47 @@ namespace FinaiProejct_200OK
                 }
 
                 ctx.SaveChanges();
+
+                count = ctx.IMDBData.Count();
+                if (count <= 0)
+                {
+                    List<IMDBData> IMDBDataList = new List<IMDBData>();
+                    IMDBDataList = IMDBParser.parseRoster(fs.ReadFile(@"..\\..\\Data\\IMDB.csv"));
+                    foreach (IMDBData i in IMDBDataList)
+                    {
+                        ctx.IMDBData.Add(i);
+                    }
+                }
+
+                ctx.SaveChanges();
+
+                /*count = ctx.Review.Count();
+                if (count <= 0)
+                {
+                    List<Review> review = new List<Review>();
+                    review = ReviewCSVParser.parseRoster(fs.ReadFile(@"..\\..\\Data\\reviews.csv"));
+                    foreach (Review i in review)
+                    {
+                        ctx.Review.Add(i);
+                    }
+                }
+
+                ctx.SaveChanges();
+
+                count = ctx.Favorite.Count();
+                if (count <= 0)
+                {
+                    List<Favorite> favList = new List<Favorite>();
+                    favList = FavoriteCSVParser.parseRoster(fs.ReadFile(@"..\\..\\Data\\favorites.csv"));
+                    foreach (Favorite i in favList)
+                    {
+                        ctx.Favorite.Add(i);
+                    }
+                }
+
+                ctx.SaveChanges();*/
             }
-        }        
+        }
 
         private class MovieTempForList
         {

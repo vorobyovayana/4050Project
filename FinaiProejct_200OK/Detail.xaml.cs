@@ -104,7 +104,7 @@ namespace FinaiProejct_200OK
 
         private void addReviewEvent(object o, EventArgs e)
         {
-            if(user != null) { 
+            if(user.UserId!=0) { 
                 using (var ctx = new MovieContext())
                 {
                     Review temp = new Review();
@@ -141,7 +141,11 @@ namespace FinaiProejct_200OK
             bitmap.EndInit();
             MoiveImg.Source = bitmap;
             MovieName.Text = movie.MovieTitle;
-            Description.Text = movie.MovieDescription;
+            using (var ctx = new MovieContext())
+            {
+                var description = ctx.Movie.Where(x => x.MovieId == movie.MovieId).FirstOrDefault();
+                DescriptionTxt.Text = description.MovieDescription;
+            }
             this.DataContext = iMDBData.imdbPath;
         }
         public void displayReview(List<Review> reviewList)
@@ -163,7 +167,6 @@ namespace FinaiProejct_200OK
                     reviewContent.Text = r.ReviewDesc;
                     reviewItem.Children.Add(userName);
                     reviewItem.Children.Add(reviewContent);
-                    reviewItem.Background = new SolidColorBrush(Colors.Blue);
                     reviewItem.Orientation = Orientation.Horizontal;
                     reviewItem.Width = 299;
                     reviewItem.Height = 50;
