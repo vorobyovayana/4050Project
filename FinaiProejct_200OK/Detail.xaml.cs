@@ -33,8 +33,22 @@ namespace FinaiProejct_200OK
             movie = m;
             user = u;
             getData();
+            isFavorite();
             AddReview.Click += addReviewEvent;
         }
+
+        private void isFavorite()
+        {
+            using (var ctx = new MovieContext())
+            {
+                var favorite = ctx.Favorite.Where(x => x.MovieId == movie.MovieId && x.MemberId==user.UserId).FirstOrDefault();
+                if (favorite == null) 
+                { 
+                    
+                }
+            }
+        }
+
         private void HandleLinkClick(object sender, RoutedEventArgs e)
         {
             Hyperlink hl = (Hyperlink)sender;
@@ -68,7 +82,7 @@ namespace FinaiProejct_200OK
         public void getData() {
             using (var ctx = new MovieContext())
             {
-                var IMDBData = ctx.IMDBData.Where(x => x.MovieId == movie.MovieId).First();
+                var IMDBData = ctx.IMDBData.Where(x => x.MovieId == movie.MovieId).FirstOrDefault() ;
                 displayIMDB(IMDBData);
 
                 var review = ctx.Review.Where(x => x.MovieId == movie.MovieId).ToList<Review>();
@@ -97,7 +111,7 @@ namespace FinaiProejct_200OK
             using (var ctx = new MovieContext()) { 
                 foreach (Review r in reviewList)
                 {
-                    var user = ctx.User.Where(x => x.UserId == r.UserId).First();
+                    var user = ctx.User.Where(x => x.UserId == r.UserId).FirstOrDefault() ;
                     StackPanel reviewItem = new StackPanel();
                     TextBlock reviewContent = new TextBlock();
                     TextBlock userName = new TextBlock();

@@ -97,8 +97,8 @@ namespace FinaiProejct_200OK
                     currentMovie.MovieId = m.MovieId;
                     currentMovie.MovieTitle = m.MovieTitle;
                     currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
-                    currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
-                    currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
+                    currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).FirstOrDefault() .ToString();
+                    currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).FirstOrDefault() .ToString();
                     tempMovieListFull.Add(currentMovie);
                 }
                 tempMovieList = tempMovieListFull.Where(x => x.MovieDirector.Contains(input) || x.MovieGenres.Contains(input) || x.MovieTitle.Contains(input)
@@ -322,7 +322,7 @@ namespace FinaiProejct_200OK
         {
             using (var ctx = new MovieContext())
             {
-                var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).First();
+                var user = ctx.User.Where(x => x.UserName == loginPage.UserNameTextBox.Text).FirstOrDefault ;
 
                 if (loginPage.PasswordTextBox.Text == user.getPassword().Trim())
                 {
@@ -359,9 +359,9 @@ namespace FinaiProejct_200OK
                     MovieTempForList currentMovie = new MovieTempForList();
                     currentMovie.MovieId = m.MovieId;
                     currentMovie.MovieTitle = m.MovieTitle;
-                    currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
-                    currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
-                    currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
+                    currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString(); 
+                    currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).FirstOrDefault() .ToString();
+                    currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).FirstOrDefault().ToString();
                     tempMovieList.Add(currentMovie);
                 }
                 MovieDataGrid.ItemsSource = tempMovieList;
