@@ -10,7 +10,7 @@ using System.Windows;
 
 namespace FinaiProejct_200OK.Entities
 {
-    public class User
+    public class User 
     {
         private string password;
         [Key]

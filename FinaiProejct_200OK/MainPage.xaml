@@ -21,5 +21,8 @@
         <Button Name="AddGenreBtn" Content="Populate Genres" HorizontalAlignment="Left" Margin="65,64,0,0" VerticalAlignment="Top" Width="75"/>
         
         <TextBlock x:Name="AccountTextBlock" TextWrapping="Wrap" Visibility="Hidden"  Foreground="#FF1148E0" Margin="645,10,41.6,373" FontSize="14" HorizontalAlignment="Center"/>
+        <Button Name="AddMovieButton" Content="Add Movie" HorizontalAlignment="Left" Margin="224,362,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="EditMovieButton" Content="Edit Movie" HorizontalAlignment="Left" Margin="343,362,0,0" VerticalAlignment="Top" Width="75"/>
+        <Button Name="DeleteMovieButton" Content="Delete Movie" HorizontalAlignment="Left" Margin="453,362,0,0" VerticalAlignment="Top" Width="75"/>
     </Grid>
 </Page>
