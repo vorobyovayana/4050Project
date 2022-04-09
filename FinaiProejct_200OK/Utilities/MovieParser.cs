@@ -24,7 +24,7 @@ namespace FinaiProejct_200OK.Utilities
 
                 string[] fields = line.Trim().Split(',');
                 //MessageBox.Show(fields.Length.ToString());
-                if (fields.Length != 4)
+                if (fields.Length != 5)
                 {
                     System.Windows.MessageBox.Show("Problem parsing file, check format in Movie");
                     continue;
@@ -33,7 +33,7 @@ namespace FinaiProejct_200OK.Utilities
                 {
                     try
                     {
-                        Movie newMovie = new Movie(fields[0], DateTime.Parse(fields[1]), Convert.ToInt32(fields[2]), Convert.ToInt32(fields[3]));
+                        Movie newMovie = new Movie(fields[0], DateTime.Parse(fields[1]), Convert.ToInt32(fields[2]), Convert.ToInt32(fields[3]), fields[4]);
                         movies.Add(newMovie);
                     }
                     catch (Exception ex)

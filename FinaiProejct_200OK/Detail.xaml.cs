@@ -1,7 +1,9 @@
 ﻿using FinaiProejct_200OK.Entities;
 using FinaiProejct_200OK.Utilities;
+using Syncfusion.Windows.Tools.Controls;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -31,6 +33,36 @@ namespace FinaiProejct_200OK
             movie = m;
             user = u;
             getData();
+            AddReview.Click += addReviewEvent;
+        }
+        private void HandleLinkClick(object sender, RoutedEventArgs e)
+        {
+            Hyperlink hl = (Hyperlink)sender;
+            string navigateUri = hl.NavigateUri.ToString();
+            Process.Start(new ProcessStartInfo(navigateUri));
+            e.Handled = true;
+        }
+
+
+        private void addReviewEvent(object o, EventArgs e)
+        {
+            if(user != null) { 
+                using (var ctx = new MovieContext())
+                {
+                    Review temp = new Review();
+                    temp.ReviewDesc = reviewDesc.Text;
+                    temp.MovieId = movie.MovieId;
+                    temp.UserId = user.UserId;
+                    ctx.Review.Add(temp);
+                    ctx.SaveChanges();
+                    ctx.Review.Add(temp);
+                    getData();
+                }
+            }
+            else
+            {
+                MessageBox.Show("Please login first");
+            }
         }
 
         public void getData() {
@@ -39,18 +71,45 @@ namespace FinaiProejct_200OK
                 var IMDBData = ctx.IMDBData.Where(x => x.MovieId == movie.MovieId).First();
                 displayIMDB(IMDBData);
 
+                var review = ctx.Review.Where(x => x.MovieId == movie.MovieId).ToList<Review>();
+                displayReview(review);
             }
         }
         public void displayIMDB(IMDBData iMDBData) {
 
             BitmapImage bitmap = new BitmapImage();
             bitmap.BeginInit();
-            bitmap.UriSource = new Uri(@iMDBData.imdbPath, UriKind.Absolute);
+            bitmap.UriSource = new Uri(@iMDBData.posterPath, UriKind.Absolute);
             bitmap.EndInit();
             MoiveImg.Source = bitmap;
             MovieName.Text = movie.MovieTitle;
-
+            Description.Text = movie.MovieDescription;
+            this.DataContext = iMDBData.imdbPath;
         }
-    }
+        public void displayReview(List<Review> reviewList)
+        {
+            stackPanel.Children.Clear();
+            using (var ctx = new MovieContext()) { 
+                foreach (Review r in reviewList)
+                {
+                    var user = ctx.User.Where(x => x.UserId == r.UserId).First();
+                    StackPanel reviewItem = new StackPanel();
+                    TextBlock reviewContent = new TextBlock();
+                    TextBlock userName = new TextBlock();
+                    userName.Text = user.UserName +" said:   ";
+                    reviewContent.Text = r.ReviewDesc;
+                    reviewItem.Children.Add(userName);
+                    reviewItem.Children.Add(reviewContent);
+                    reviewItem.Background = new SolidColorBrush(Colors.Blue);
+                    reviewItem.Orientation = Orientation.Horizontal;
+                    reviewItem.Width = 299;
+                    reviewItem.Height = 50;
+                    stackPanel.Children.Add(reviewItem);
+                    stackPanel.Visibility = Visibility.Visible;
+                    //reviewGrid.Children.Add(reviewItem);
+                }
+            }
+        }
 
+    }
 }

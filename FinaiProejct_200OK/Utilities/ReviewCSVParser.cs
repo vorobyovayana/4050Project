@@ -22,7 +22,8 @@ namespace FinaiProejct_200OK.Utilities
                        new Review(
                         Convert.ToInt32(values[0]),
                         Convert.ToInt32(values[1]),
-                        values[2]
+                        Convert.ToInt32(values[2]),
+                        values[3]
                         )
                        );
             }
