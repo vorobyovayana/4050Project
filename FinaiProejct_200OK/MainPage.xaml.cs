@@ -3,11 +3,13 @@ using FinaiProejct_200OK.Utilities;
 using Microsoft.Win32;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Data;
 using System.IO;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Web.UI.WebControls;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -25,11 +27,13 @@ namespace FinaiProejct_200OK
     /// </summary>
     public partial class MainPage : Page
     {
+        
         Login loginPage;
-        Button subLogInButton;
+        System.Windows.Controls.Button subLogInButton;
         CreateAccount createPage;
+        MovieEditionPage editionPage;
 
-        DataGrid movieGrid;
+        
         List<Director> directors = new List<Director>();
         List<Genre> genres = new List<Genre>();
         List<Movie> movies;
@@ -39,22 +43,25 @@ namespace FinaiProejct_200OK
         GenreParser gp = new GenreParser();
         string directorFileName = "";
         string genreFileName = "";
+       
+        
 
         public MainPage()
         {
             InitializeComponent();
             commonUsage();
+            
         }
 
         public MainPage(User user)
         {
             InitializeComponent();
-            u =user;
+            u = user;
 
             MainWindow parentWindow = Window.GetWindow(this) as MainWindow;
             /*parentWindow.LogoutButton.Visibility = Visibility.Visible;
             parentWindow.LoginButton.Visibility = Visibility.Hidden;*/
-            Great.Content = "Hi, " + u.UserName;
+            Great.Content = "Hi, " + u.UserName;           
             commonUsage();
         }
         public void commonUsage() {
@@ -69,7 +76,7 @@ namespace FinaiProejct_200OK
             InitializeDirectorsListBox();
             InitializeGenresListBox();
             PopulateMovie();
-            movieGrid = MovieDataGrid;
+            
 
             toggleEvent(true);
         }
@@ -85,9 +92,24 @@ namespace FinaiProejct_200OK
                 AddGenreBtn.Click += selectGenreFile;
                 AddDirectorBtn.Click += selectDirectorFile;
                 MovieDataGrid.MouseDoubleClick += DataGridCellMouseDoubleClick;
+                AddMovieButton.Click += AddMovieButtonClick;
+                EditMovieButton.Click += EditMovieButtonClick;
+                DeleteMovieButton.Click += DeleteMovieButtonClick;    
+                
+
+
+
             }
         }
+
+        private void WindowClosed(Object o, EventArgs e)
+        {
+           PopulateMovie();  
+        }
+
+
         
+
         private void DataGridCellMouseDoubleClick(object sender, MouseButtonEventArgs e)
         {
             Movie temp = new Movie();
@@ -270,7 +292,7 @@ namespace FinaiProejct_200OK
                     MovieTempForList currentMovie = new MovieTempForList();
                     currentMovie.MovieId = m.MovieId;
                     currentMovie.MovieTitle = m.MovieTitle;
-                    currentMovie.ReleaseDate = m.ReleaseDate;
+                    currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
                     currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
                     currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
                     tempMovieList.Add(currentMovie);
@@ -279,7 +301,7 @@ namespace FinaiProejct_200OK
             }
         }
 
-        private void InitializeMovieGrid()
+       /* private void InitializeMovieGrid()
         {
             DataGridTextColumn movieTitleColumn = new DataGridTextColumn();
             movieTitleColumn.Header = "Movie Title";
@@ -301,6 +323,48 @@ namespace FinaiProejct_200OK
             MovieDataGrid.Columns.Add(movieReleaseDateColumn);
             MovieDataGrid.Columns.Add(genreColumn);
             MovieDataGrid.Columns.Add(directorColumn);
+        }*/
+
+        private void AddMovieButtonClick(Object o, EventArgs e)
+        {
+            editionPage = new MovieEditionPage();
+            
+            editionPage.Show();
+            editionPage.Closed += WindowClosed;
+        }
+
+        private void EditMovieButtonClick(Object o, EventArgs e)
+        {
+            using (var ctx = new MovieContext())
+            {
+                movies = ctx.Movie.ToList();
+            }
+
+            if (MovieDataGrid.SelectedItem != null)
+            {
+                editionPage = new MovieEditionPage(movies[MovieDataGrid.SelectedIndex].MovieId);
+
+                editionPage.Show();
+                editionPage.Closed += WindowClosed;
+            } else
+            {
+                MessageBox.Show("Please select an item");
+            }
+
+            
+        }
+
+        private void DeleteMovieButtonClick(Object o, EventArgs e)
+        {
+            using (var ctx = new MovieContext())
+            {
+                movies = ctx.Movie.ToList();
+                Movie deleteMovie = movies[MovieDataGrid.SelectedIndex];
+                ctx.Movie.Remove(ctx.Movie.Where(x => x.MovieId == deleteMovie.MovieId).First());
+                ctx.SaveChanges();
+            }
+
+            PopulateMovie();
         }
 
         private void ReadDataToDatabase()
@@ -310,7 +374,7 @@ namespace FinaiProejct_200OK
             {
                 // First from director                
                 var count = ctx.Director.Count();
-                if (count < 5)
+                if (count <= 0)
                 {
                     List<Director> directorList = new List<Director>();
                     directorList = DirectorParser.ParseDirector(fs.ReadFile(@"..\\..\\Data\\directors.csv"));
@@ -323,7 +387,7 @@ namespace FinaiProejct_200OK
                 ctx.SaveChanges();
                 // Second is Genre                
                 count = ctx.Genre.Count();
-                if (count < 5)
+                if (count <= 0)
                 {
                     List<Genre> genreList = new List<Genre>();
                     genreList = GenreParser.ParseGenre(fs.ReadFile(@"..\\..\\Data\\genres.csv"));
@@ -337,7 +401,7 @@ namespace FinaiProejct_200OK
 
                 // Then add into Movie
                 count = ctx.Movie.Count();
-                if (count < 5)
+                if (count <= 0)
                 {
                     List<Movie> movieList = new List<Movie>();
                     movieList = MovieParser.ParseMovie(fs.ReadFile(@"..\\..\\Data\\movies.csv"));
@@ -355,15 +419,17 @@ namespace FinaiProejct_200OK
 
                 ctx.SaveChanges();
             }
-        }
+        }        
 
         private class MovieTempForList
         {
             public int MovieId { get; set; }
             public string MovieTitle { get; set; }
-            public DateTime ReleaseDate { get; set; }
+            public string ReleaseDate { get; set; }
             public string MovieDirector { get; set; }
             public string MovieGenres { get; set; }
+
+            
         }
 
     }
