@@ -38,23 +38,37 @@ namespace FinaiProejct_200OK
         private void checkPwd(object sender, RoutedEventArgs e)
         {
             User user = null;
+            if (UserNameTextBox.Text.Count() == 0 || PasswordTextBox.Text.Count() == 0)
+            {
+                HintTextBlock.Text = "Invalid Input, please input valid input";
+                HintTextBlock.Visibility = Visibility.Visible;
+            }
             using (var ctx = new MovieContext())
             {
-                user = ctx.User.Where(x => x.UserName == UserNameTextBox.Text).First();
+                try
+                {
+                    user = ctx.User.Where(x => x.UserName == UserNameTextBox.Text).First();
 
-                if (PasswordTextBox.Text == user.getPassword().Trim())
+                    if (PasswordTextBox.Text == user.getPassword().Trim())
+                    {
+                        HintTextBlock.Text = "";
+                        UserNameTextBox.Text = "";
+                        PasswordTextBox.Text = "";
+                    }
+                    else
+                    {
+                        HintTextBlock.Visibility = Visibility.Visible;
+                        HintTextBlock.Text = "Wrong input information";
+                    }
+                    this.NavigationService.Navigate(new MainPage(user));
+                } catch (Exception ex)
                 {
-                    HintTextBlock.Text = "";
-                    UserNameTextBox.Text = "";
-                    PasswordTextBox.Text = "";
-                }
-                else
-                {
+                    HintTextBlock.Text = "User name is wrong!";
                     HintTextBlock.Visibility = Visibility.Visible;
-                    HintTextBlock.Text = "Wrong input information";
                 }
+                
             }
-            this.NavigationService.Navigate(new MainPage(user));
+            
         }
         
         void navigateBackButton_Click(object sender, RoutedEventArgs e)

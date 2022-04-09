@@ -15,7 +15,7 @@
         <TextBox x:Name="PasswordTextBox" HorizontalAlignment="Left" Height="23" Margin="117,77,0,0" TextWrapping="Wrap" VerticalAlignment="Top" Width="120"/>
         <Button x:Name="SubLoginButton" Content="Login" HorizontalAlignment="Left" Margin="162,125,0,0" VerticalAlignment="Top" Width="75"/>
         <Button x:Name="Back" Content="Back" HorizontalAlignment="Left" Margin="42,125,0,0" VerticalAlignment="Top" Width="75"/>
-        <TextBlock x:Name="HintTextBlock" HorizontalAlignment="Left" Margin="10,104,-13.8,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.335" Width="263" Foreground="Red"/>
+        <TextBlock x:Name="HintTextBlock" HorizontalAlignment="Left" Margin="42,104,0,0" TextWrapping="Wrap" VerticalAlignment="Top" RenderTransformOrigin="0.262,0.335" Width="231" Foreground="Red"/>
 
 
     </Grid>
