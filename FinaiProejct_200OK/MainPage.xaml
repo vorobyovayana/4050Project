@@ -16,7 +16,11 @@
         <Button Name="FavoritesButton" Content="Go to Favorites" HorizontalAlignment="Left" Margin="656,362,0,0" VerticalAlignment="Top" Width="75"/>
         <Label Content ="Directors" HorizontalAlignment="Left" Margin="72,83,0,0" VerticalAlignment="Top"/>
         <Label Content="Genres" HorizontalAlignment="Left" Margin="656,91,0,0" VerticalAlignment="Top"/>
+<<<<<<< HEAD
         <Label x:Name="Great" Content="" HorizontalAlignment="Left" Margin="620,32,0,0" VerticalAlignment="Top"/>
+=======
+        <Label x:Name="Great" Content="" HorizontalAlignment="Left" Margin="550,32,0,0" VerticalAlignment="Top"/>
+>>>>>>> dev
         <Button Name ="AddDirectorBtn" Content="Populate Directors" HorizontalAlignment="Left" Margin="65,32,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="AddGenreBtn" Content="Populate Genres" HorizontalAlignment="Left" Margin="65,64,0,0" VerticalAlignment="Top" Width="75"/>
         

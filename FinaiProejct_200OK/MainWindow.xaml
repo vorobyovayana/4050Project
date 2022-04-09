@@ -7,10 +7,10 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Frame x:Name="frame"
+        <Frame Name="frame"
                        NavigationUIVisibility="Hidden">
         </Frame>
-        <Button x:Name="CreateButton" HorizontalAlignment="Left" Content="Create Account" Margin="656,17,0,0" VerticalAlignment="Top" Width="87" />
+        <Button Name="CreateButton" HorizontalAlignment="Left" Content="Create Account" Margin="656,17,0,0" VerticalAlignment="Top" Width="87" />
         <Button Name="LoginButton" Content="LogIn" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="LogoutButton" Content="LogOut" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
     </Grid>

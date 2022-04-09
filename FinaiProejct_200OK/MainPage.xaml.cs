@@ -31,6 +31,8 @@ namespace FinaiProejct_200OK
         Login loginPage;
         System.Windows.Controls.Button subLogInButton;
         CreateAccount createPage;
+        List<MovieTempForList> tempMovieList;
+        
         MovieEditionPage editionPage;
 
         
@@ -64,6 +66,7 @@ namespace FinaiProejct_200OK
             Great.Content = "Hi, " + u.UserName;           
             commonUsage();
         }
+
         public void commonUsage() {
             movies = new List<Movie>();
             //myUser = null;
@@ -80,7 +83,30 @@ namespace FinaiProejct_200OK
 
             toggleEvent(true);
         }
+        private void SearchInput(Object o, EventArgs e)
+        {
 
+            string input = SearchTextBox.Text;
+            using (var ctx = new MovieContext())
+            {
+                movies = ctx.Movie.ToList();
+                List<MovieTempForList> tempMovieListFull = new List<MovieTempForList>();
+                foreach (Movie m in movies)
+                {
+                    MovieTempForList currentMovie = new MovieTempForList();
+                    currentMovie.MovieId = m.MovieId;
+                    currentMovie.MovieTitle = m.MovieTitle;
+                    currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
+                    currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
+                    currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
+                    tempMovieListFull.Add(currentMovie);
+                }
+                tempMovieList = tempMovieListFull.Where(x => x.MovieDirector.Contains(input) || x.MovieGenres.Contains(input) || x.MovieTitle.Contains(input)
+                || x.MovieId.ToString().Contains(input) || x.ReleaseDate.ToString().Contains(input))
+                    .ToList();
+            }
+            MovieDataGrid.ItemsSource = tempMovieList;
+        }
         private void toggleEvent(bool toggle)
         {
             if (toggle)

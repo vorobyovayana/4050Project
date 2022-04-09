@@ -89,6 +89,11 @@ namespace FinaiProejct_200OK
         public void displayReview(List<Review> reviewList)
         {
             stackPanel.Children.Clear();
+            if (reviewList.Count == 0) {
+                TextBlock reviewContent = new TextBlock();
+                reviewContent.Text = "No reviews. You're welcome to add one";
+                stackPanel.Children.Add(reviewContent);
+            }
             using (var ctx = new MovieContext()) { 
                 foreach (Review r in reviewList)
                 {
