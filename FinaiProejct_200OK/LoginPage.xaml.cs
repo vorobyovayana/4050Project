@@ -77,7 +77,7 @@ namespace FinaiProejct_200OK
             // in back navigation history
             if (this.NavigationService.CanGoBack)
             {
-                this.NavigationService.GoBack();
+                this.NavigationService.Navigate(new MainPage(new User()));
             }
             else
             {

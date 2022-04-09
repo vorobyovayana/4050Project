@@ -39,7 +39,7 @@ namespace FinaiProejct_200OK
         List<Director> directors = new List<Director>();
         List<Genre> genres = new List<Genre>();
         List<Movie> movies;
-        User u = null;
+        User u = new User();
         FileService fs = new FileService();
         DirectorParser dp = new DirectorParser();
         GenreParser gp = new GenreParser();
@@ -53,17 +53,25 @@ namespace FinaiProejct_200OK
             InitializeComponent();
             commonUsage();
             
+            
         }
 
         public MainPage(User user)
         {
             InitializeComponent();
             u = user;
+            if (user == null ||user.UserId == 0) 
+            {
+                LogoutButton.Visibility = Visibility.Hidden;
+                LoginButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LogoutButton.Visibility = Visibility.Visible;
+                LoginButton.Visibility = Visibility.Hidden;
+                Great.Content = "Hi, " + u.UserName;
 
-            MainWindow parentWindow = Window.GetWindow(this) as MainWindow;
-            /*parentWindow.LogoutButton.Visibility = Visibility.Visible;
-            parentWindow.LoginButton.Visibility = Visibility.Hidden;*/
-            Great.Content = "Hi, " + u.UserName;           
+            }
             commonUsage();
         }
 
@@ -105,6 +113,55 @@ namespace FinaiProejct_200OK
             }
             MovieDataGrid.ItemsSource = tempMovieList;
         }
+        
+        private void GoToFavList(object sender, RoutedEventArgs e)
+        {
+            if (u.UserId !=0)
+            {
+                this.NavigationService.Navigate(new FavoritePage(u));
+            }
+            else {
+                MessageBox.Show("Please login");
+            }
+        }
+        private void toggleVisible(bool toggle)
+        {
+            if (toggle)
+            {
+                LoginButton.Visibility = Visibility.Visible;
+                LogoutButton.Visibility = Visibility.Visible;
+                CreateButton.Visibility = Visibility.Visible;
+            }
+            else
+            {
+                LoginButton.Visibility = Visibility.Hidden;
+                LogoutButton.Visibility = Visibility.Hidden;
+                CreateButton.Visibility = Visibility.Hidden;
+            }
+        }
+
+
+
+        private void CreateButtonClick(object sender, RoutedEventArgs e)
+        {
+
+            toggleVisible(false);
+            this.NavigationService.Navigate(new CreateAccount());
+        }
+
+        private void LoginButtonClick(Object o, EventArgs e)
+        {
+
+            toggleVisible(false);
+            this.NavigationService.Navigate(new LoginPage());
+        }
+        private void LogOutButtonClick(Object o, EventArgs e)
+        {
+
+            toggleVisible(true);
+            this.NavigationService.Navigate(new MainPage());
+
+        }
         private void toggleEvent(bool toggle)
         {
             if (toggle)
@@ -120,6 +177,12 @@ namespace FinaiProejct_200OK
                 EditMovieButton.Click += EditMovieButtonClick;
                 DeleteMovieButton.Click += DeleteMovieButtonClick;
                 SearchTextBox.TextChanged += SearchTextInput;
+
+                LoginButton.Click += LoginButtonClick;
+                LogoutButton.Click += LogOutButtonClick;
+                CreateButton.Click += CreateButtonClick;
+                FavoritesButton.Click += GoToFavList;
+
             }
         }
 

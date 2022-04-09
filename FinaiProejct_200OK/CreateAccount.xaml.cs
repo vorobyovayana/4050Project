@@ -31,7 +31,8 @@ namespace FinaiProejct_200OK
 
         private void GoBack(object sender, RoutedEventArgs e)
         {
-            this.NavigationService.GoBack();
+            User u = new User();
+            this.NavigationService.Navigate(new MainPage(u));
         }
 
         private void SubCreateButtonClick(Object o, EventArgs e)
@@ -52,8 +53,8 @@ namespace FinaiProejct_200OK
                         newUser.UserName = CreateUserNameTextBox.Text;
                         newUser.setPassword(CreatePasswordTextBox.Text);
                         ctx.User.Add(newUser);
-                        ctx.SaveChanges();
-                        this.NavigationService.GoBack();
+                        ctx.SaveChanges(); 
+                        this.NavigationService.Navigate(new MainPage(new User()));
 
                     }
                     else

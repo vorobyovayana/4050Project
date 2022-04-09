@@ -36,7 +36,14 @@ namespace FinaiProejct_200OK
             getData();
             AddReview.Click += addReviewEvent;
             FavoriteBtn.Click += FavEvent;
+            CloseBtn.Click += navigateBackButton_Click;
             isFav =isFavorite();
+        }
+        void navigateBackButton_Click(object sender, RoutedEventArgs e)
+        {
+
+            this.NavigationService.Navigate(new MainPage(user));
+
         }
         private void FavEvent(object o, EventArgs e)
         {

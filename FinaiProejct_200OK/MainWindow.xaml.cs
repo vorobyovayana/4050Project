@@ -36,60 +36,9 @@ namespace FinaiProejct_200OK
             mainWindow = Window.GetWindow(this) as MainWindow;
             Frame frame = (Frame)mainWindow.FindName("frame");
             frame.Navigate(new MainPage());
-            toggleEvent(true);
-
-        }
-
-        private void toggleEvent(bool toggle)
-        {
-            if (toggle)
-            {
-                LoginButton.Click += LoginButtonClick;
-                LogoutButton.Click += LogOutButtonClick;
-                CreateButton.Click += CreateButtonClick;
-                FavoritesButton.Click += GoToFavList;
-            }
-        }
-        private void GoToFavList(object sender, RoutedEventArgs e)
-        {
-            frame.Navigate(new CreateAccount());
-        }
-        private void toggleVisible(bool toggle)
-        {
-            if (toggle)
-            {
-                LoginButton.Visibility = Visibility.Visible;
-                LogoutButton.Visibility = Visibility.Visible;
-                CreateButton.Visibility = Visibility.Visible;
-            }
-            else {
-                LoginButton.Visibility = Visibility.Hidden;
-                LogoutButton.Visibility = Visibility.Hidden;
-                CreateButton.Visibility = Visibility.Hidden;
-            }
-        }
-
-        
-
-        private void CreateButtonClick(object sender, RoutedEventArgs e)
-        {
-
-            toggleVisible(false);
-            frame.Navigate(new CreateAccount());
-        }
-
-        private void LoginButtonClick(Object o, EventArgs e)
-        {
             
-            toggleVisible(false);
-            frame.Navigate(new LoginPage());
-        }
-        private void LogOutButtonClick(Object o, EventArgs e)
-        {
-
-            toggleVisible(true);
-            frame.Navigate(new MainPage());
 
         }
+
     }
 }
