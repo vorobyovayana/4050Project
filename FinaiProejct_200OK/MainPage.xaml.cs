@@ -425,16 +425,23 @@ namespace FinaiProejct_200OK
 
         private void DeleteMovieButtonClick(Object o, EventArgs e)
         {
-            using (var ctx = new MovieContext())
+            if (MovieDataGrid.SelectedItem == null)
             {
-                movies = ctx.Movie.ToList();            
+                MessageBox.Show("Please select one element for deleting!");
+            } else
+            {
+                using (var ctx = new MovieContext())
+                {
+                    movies = ctx.Movie.ToList();
 
-                Movie deleteMovie = movies[MovieDataGrid.SelectedIndex];
-                ctx.Movie.Remove(ctx.Movie.Where(x => x.MovieId == deleteMovie.MovieId).First());
-                ctx.SaveChanges();
+                    Movie deleteMovie = movies[MovieDataGrid.SelectedIndex];
+                    ctx.Movie.Remove(ctx.Movie.Where(x => x.MovieId == deleteMovie.MovieId).First());
+                    ctx.SaveChanges();
+                }
+
+                PopulateMovie();
             }
-
-            PopulateMovie();
+            
         }
 
         private void ReadDataToDatabase()

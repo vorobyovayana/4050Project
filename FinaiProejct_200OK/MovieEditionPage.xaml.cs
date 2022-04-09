@@ -25,6 +25,8 @@ namespace FinaiProejct_200OK
         public MovieEditionPage()
         {
             InitializeComponent();
+            EditionMovieIdTextBlock.Visibility = Visibility.Hidden;
+            EditionMovieIdTextBox.Visibility = Visibility.Hidden;
             EditionAddMovieButton.Visibility = Visibility.Visible;
             toggleEvent(true);
         }
@@ -41,14 +43,19 @@ namespace FinaiProejct_200OK
                 {
                     var currentMovie = ctx.Movie.Where(x => x.MovieId.ToString() == EditionMovieIdTextBox.Text).First();
                     EditionMovieTitleTextBox.Text = currentMovie.MovieTitle;
-                    EditionReleaseTextBox.Text = currentMovie.ReleaseDate.ToShortDateString();
+                    EditionReleaseDatePicker.SelectedDate = currentMovie.ReleaseDate;
                     EditionDirectorTextBox.Text = currentMovie.DirectorId.ToString();
                     EditionGenreTextBox.Text = currentMovie.GenreId.ToString();
+                    var imdb = ctx.IMDBData.Where(x => x.MovieId == currentMovie.MovieId).First();
+                    if (imdb != null)
+                    {
+                        EditionImdbPathTextBox.Text = imdb.imdbPath;
+                        EditionPosterPathTextBox.Text = imdb.posterPath;
+                    }
                 }
             } catch (Exception ex)
             {
-                MessageBox.Show("Something wrong when get the data from database! " + ex.Message);
-                
+                MessageBox.Show("Something wrong when get the data from database! " + ex.Message);                
             }
 
         }
@@ -58,22 +65,35 @@ namespace FinaiProejct_200OK
             try
             {
                 using (var ctx = new MovieContext())
-                {
-                    DateTime theDate;
+                {                    
                     var currentMovie = ctx.Movie.Where(x => x.MovieId.ToString() == EditionMovieIdTextBox.Text).First();
                     currentMovie.MovieTitle = EditionMovieTitleTextBox.Text;                    
                     currentMovie.DirectorId = Convert.ToInt32(EditionDirectorTextBox.Text);
                     currentMovie.GenreId = Convert.ToInt32(EditionGenreTextBox.Text);
-
-                    if (DateTime.TryParse(EditionReleaseTextBox.Text, out theDate))
+                    var currentImdb = ctx.IMDBData.Where(i => i.MovieId == currentMovie.MovieId).First();
+                    if (currentImdb == null)
                     {
-                        currentMovie.ReleaseDate = theDate;
-                        ctx.SaveChanges();
+                        IMDBData imdb = new IMDBData();
+                        imdb.imdbPath = EditionImdbPathTextBox.Text;
+                        imdb.posterPath = EditionPosterPathTextBox.Text;
+                        imdb.MovieId = currentMovie.MovieId;
+                        ctx.IMDBData.Add(imdb);
+                    }
+                    else
+                    {
+                        currentImdb.imdbPath = EditionImdbPathTextBox.Text;
+                        currentImdb.posterPath = EditionPosterPathTextBox.Text;
+                    }
+                    if (EditionReleaseDatePicker.SelectedDate != null)
+                    {
+                        currentMovie.ReleaseDate = EditionReleaseDatePicker.SelectedDate.Value;
+                        ctx.SaveChanges(); 
                         this.Close();
                     } else
                     {
-                        EditionHintTextBox.Text = "The date time format is wrong!";
+                        EditionHintTextBox.Text = "Please select a date";
                     }
+                    
 
                     
                 }
@@ -88,7 +108,7 @@ namespace FinaiProejct_200OK
 
         private void AddButtonClick(Object o, EventArgs e)
         {
-            if (EditionMovieTitleTextBox.Text.Length == 0 || EditionReleaseTextBox.Text.Length == 0 || EditionDirectorTextBox.Text.Length == 0
+            if (EditionMovieTitleTextBox.Text.Length == 0 || EditionReleaseDatePicker.SelectedDate == null || EditionDirectorTextBox.Text.Length == 0
                 || EditionGenreTextBox.Text.Length == 0)
             {
                 MessageBox.Show("Please enter all fields");
@@ -97,20 +117,26 @@ namespace FinaiProejct_200OK
             {
                 using (var ctx = new MovieContext())
                 {
-                    DateTime myDate;
+                    
                     Movie newMovie = new Movie();
                     newMovie.MovieTitle = EditionMovieTitleTextBox.Text;
                     newMovie.GenreId = Convert.ToInt32(EditionGenreTextBox.Text);
                     newMovie.DirectorId = Convert.ToInt32(EditionDirectorTextBox.Text);
-                    if (DateTime.TryParse(EditionReleaseTextBox.Text, out myDate))
+                    if (EditionReleaseDatePicker.SelectedDate != null)
                     {
-                        newMovie.ReleaseDate = myDate;
+                        newMovie.ReleaseDate = EditionReleaseDatePicker.SelectedDate.Value;
                         ctx.Movie.Add(newMovie);
+                        ctx.SaveChanges();
+                        IMDBData imdb = new IMDBData();
+                        imdb.imdbPath = EditionImdbPathTextBox.Text;
+                        imdb.posterPath = EditionPosterPathTextBox.Text;
+                        imdb.MovieId = newMovie.MovieId;
+                        ctx.IMDBData.Add(imdb);
                         ctx.SaveChanges();
                         this.Close();
                     } else
                     {
-                        EditionHintTextBox.Text = "Date time format is wrong!";
+                        EditionHintTextBox.Text = "Please select a date!";
                     }
                     
                 }
