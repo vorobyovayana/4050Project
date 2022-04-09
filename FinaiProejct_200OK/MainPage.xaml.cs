@@ -94,7 +94,9 @@ namespace FinaiProejct_200OK
                 MovieDataGrid.MouseDoubleClick += DataGridCellMouseDoubleClick;
                 AddMovieButton.Click += AddMovieButtonClick;
                 EditMovieButton.Click += EditMovieButtonClick;
-                DeleteMovieButton.Click += DeleteMovieButtonClick;    
+                DeleteMovieButton.Click += DeleteMovieButtonClick;
+
+                SearchTextBox.TextChanged += SearchTextInput;
                 
 
 
@@ -105,6 +107,45 @@ namespace FinaiProejct_200OK
         private void WindowClosed(Object o, EventArgs e)
         {
            PopulateMovie();  
+        }
+
+        private void SearchTextInput(Object o, EventArgs e)
+        {
+            string keyWord = SearchTextBox.Text;
+            if (keyWord.Length == 0)
+            {
+                EditMovieButton.IsEnabled = true;
+                DeleteMovieButton.IsEnabled = true;
+                using (var ctx = new MovieContext())
+                {
+                    movies = ctx.Movie.ToList();
+                }
+                PopulateMovie();
+            } else
+            {
+                EditMovieButton.IsEnabled = false;
+                DeleteMovieButton.IsEnabled = false;
+                using (var ctx = new MovieContext())
+                {
+                    movies = ctx.Movie.ToList();
+                    List<MovieTempForList> tempMovieList = new List<MovieTempForList>();
+                    foreach (Movie m in movies)
+                    {
+                        MovieTempForList currentMovie = new MovieTempForList();
+                        currentMovie.MovieId = m.MovieId;
+                        currentMovie.MovieTitle = m.MovieTitle;
+                        currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
+                        currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
+                        currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
+                        tempMovieList.Add(currentMovie);
+                    }
+                    tempMovieList = tempMovieList.Where(x => x.MovieTitle.Contains(keyWord) || x.MovieId.ToString().Contains(keyWord) ||
+                        x.ReleaseDate.Contains(keyWord) || x.MovieGenres.Contains(keyWord) || x.MovieDirector.Contains(keyWord)).ToList();
+                    MovieDataGrid.ItemsSource = tempMovieList;
+                    
+                }
+                
+            }
         }
 
 
@@ -358,7 +399,8 @@ namespace FinaiProejct_200OK
         {
             using (var ctx = new MovieContext())
             {
-                movies = ctx.Movie.ToList();
+                movies = ctx.Movie.ToList();            
+
                 Movie deleteMovie = movies[MovieDataGrid.SelectedIndex];
                 ctx.Movie.Remove(ctx.Movie.Where(x => x.MovieId == deleteMovie.MovieId).First());
                 ctx.SaveChanges();

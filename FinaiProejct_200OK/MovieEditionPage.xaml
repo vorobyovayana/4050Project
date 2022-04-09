@@ -19,7 +19,7 @@
         <TextBox x:Name="EditionGenreTextBox" HorizontalAlignment="Left" Height="23" Margin="193,157,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <Button x:Name="EditionAddMovieButton" Content="Add" HorizontalAlignment="Left" Margin="295,197,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
         <Button x:Name="EditionEditMovieButton" Content="Edit" HorizontalAlignment="Left" Margin="295,197,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
-        <TextBox x:Name="EditionHintTextBox" HorizontalAlignment="Left" Height="23" Margin="10,193,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266" Foreground="Red"/>
+        <TextBlock x:Name="EditionHintTextBox" HorizontalAlignment="Left" Height="23" Margin="10,193,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266" Foreground="Red"/>
 
     </Grid>
 </Window>
