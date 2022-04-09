@@ -8,11 +8,12 @@ using System.Threading.Tasks;
 
 namespace FinaiProejct_200OK.Entities
 {
-    class IMDBData
+    public class IMDBData
     {
         
         [Key]
         public int MovieId { get; set; }
         public string imdbPath { get; set; }
+        public string posterPath { get; set; }
     }
 }

@@ -7,14 +7,15 @@ using System.Threading.Tasks;
 
 namespace FinaiProejct_200OK.Entities
 {
-    class Review
+    public class Review
     {
         [Key]
         public int ReviewId { get; set; }
         public int MovieId { get; set; }
+        public int UserId { get; set; }
         public string ReviewDesc { get; set; }
 
-        public Review(int reviewId, int movieId, string reviewDesc)
+        public Review(int reviewId, int movieId,int userId, string reviewDesc)
         {
             ReviewId = reviewId;
             MovieId = movieId;

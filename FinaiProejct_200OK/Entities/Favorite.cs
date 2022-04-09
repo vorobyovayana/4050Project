@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace FinaiProejct_200OK.Entities
 {
-    class Favorite
+    public class Favorite
     {
         [Key]
         [Required]
