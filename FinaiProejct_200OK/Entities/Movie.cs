@@ -29,41 +29,24 @@ namespace FinaiProejct_200OK.Entities
             }
         }
         [ForeignKey("Director")]
-        public int DirectorId { get 
-            {
-                return this.directorId;
-            } set 
-            {
-                this.directorId = value;
-                NotifiyPropertyChanged(); 
-            } }
-        public string MovieTitle { get 
-            {
-                return movieTitle;
-            } set {
-                movieTitle = value;
-                NotifiyPropertyChanged();
-            } }
-        public DateTime ReleaseDate { get
-            {
-                return releaseDate;
-            }
-            set
-            {
-                releaseDate = value;
-                NotifiyPropertyChanged();
-            } }
+        public int DirectorId { get; set; }
+        public string MovieTitle { get; set; }
+        public string MovieDescription { get; set; }
+        public DateTime ReleaseDate { get; set; }
+
 
         public List<Review> Reviews { get; set; }
 
         public IMDBData imdbData { get; set; }
 
-        public Movie( string movieTitle, DateTime releaseDate, int genreId, int directorId)
+        public Movie( string movieTitle, DateTime releaseDate, int genreId, int directorId,string movieDescription)
         {
             GenreId = genreId;
             DirectorId = directorId;
             MovieTitle = movieTitle;
             ReleaseDate = releaseDate;
+            MovieDescription = movieDescription;
+
         }
 
         public Movie() { }

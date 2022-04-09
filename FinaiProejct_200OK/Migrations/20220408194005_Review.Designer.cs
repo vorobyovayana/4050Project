@@ -4,14 +4,16 @@ using FinaiProejct_200OK.Utilities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace FinaiProejct_200OK.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    partial class MovieContextModelSnapshot : ModelSnapshot
+    [Migration("20220408194005_Review")]
+    partial class Review
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -75,9 +77,6 @@ namespace FinaiProejct_200OK.Migrations
                     b.Property<string>("imdbPath")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("posterPath")
-                        .HasColumnType("nvarchar(max)");
-
                     b.HasKey("MovieId");
 
                     b.ToTable("IMDBData");
@@ -95,9 +94,6 @@ namespace FinaiProejct_200OK.Migrations
 
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
-
-                    b.Property<string>("MovieDescription")
-                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovieTitle")
                         .HasColumnType("nvarchar(max)");

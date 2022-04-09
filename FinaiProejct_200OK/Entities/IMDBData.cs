@@ -14,5 +14,6 @@ namespace FinaiProejct_200OK.Entities
         [Key]
         public int MovieId { get; set; }
         public string imdbPath { get; set; }
+        public string posterPath { get; set; }
     }
 }
