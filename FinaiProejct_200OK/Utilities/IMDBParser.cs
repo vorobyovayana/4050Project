@@ -6,11 +6,11 @@ using System.Linq;
 
 namespace FinaiProejct_200OK.Utilities
 {
-    class ReviewCSVParser
+    class IMDBParser
     {
-        public static List<Review> parseRoster(String fileContents)
+        public static List<IMDBData> parseRoster(String fileContents)
         {
-            IEnumerable<Review> reviews = Enumerable.Empty<Review>();
+            IEnumerable<IMDBData> reviews = Enumerable.Empty<IMDBData>();
             // get rows by spliting '\n' syntax
             string[] lines = fileContents.Split('\n');
             try
@@ -19,11 +19,8 @@ namespace FinaiProejct_200OK.Utilities
                     .Where(values => values[0] != "")
                     .Where(values => values[0] != "MovieId")
                        .Select(values =>
-                       new Review(
-                        Convert.ToInt32(values[0]),
-                        Convert.ToInt32(values[1]),
-                        values[2]
-                        )
+                       new IMDBData(
+                        Convert.ToInt32(values[0]),values[1],values[2])
                        );
             }
             catch (Exception ex)
@@ -31,7 +28,7 @@ namespace FinaiProejct_200OK.Utilities
                 Console.WriteLine(ex.Message);
             }
 
-            return reviews.ToList<Review>();
+            return reviews.ToList<IMDBData>();
         }
     }
 }

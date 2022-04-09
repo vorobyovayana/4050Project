@@ -17,7 +17,7 @@ namespace FinaiProejct_200OK.Utilities
             {
                 favorites = lines.Select(line => line.Split(','))
                     .Where(values => values[0] != "")
-                    .Where(values => values[0] != "MemberId")
+                    .Where(values => values[0] != "UserId")
                        .Select(values =>
                        new Favorite(
                         Convert.ToInt32(values[0]),

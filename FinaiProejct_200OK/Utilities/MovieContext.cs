@@ -16,6 +16,7 @@ namespace FinaiProejct_200OK.Utilities
         public DbSet<Favorite> Favorite { get; set; }
         public DbSet<Director> Director { get; set; }
         public DbSet<IMDBData> IMDBData { get; set; }
+        public DbSet<Review> Review { get; set; }
 
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
@@ -24,7 +25,7 @@ namespace FinaiProejct_200OK.Utilities
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             modelBuilder.Entity<Favorite>()
-                .HasKey(c => new { c.MemberId, c.MovieId });
+                .HasKey(c => new { c.UserId, c.MovieId });
 
         }
     }

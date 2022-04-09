@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinaiProejct_200OK.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20220407050003_init")]
+    [Migration("20220409163412_init")]
     partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -38,18 +38,13 @@ namespace FinaiProejct_200OK.Migrations
 
             modelBuilder.Entity("FinaiProejct_200OK.Entities.Favorite", b =>
                 {
-                    b.Property<int>("MemberId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.Property<int>("MovieId")
                         .HasColumnType("int");
 
-                    b.Property<int?>("UserId")
-                        .HasColumnType("int");
-
-                    b.HasKey("MemberId", "MovieId");
-
-                    b.HasIndex("UserId");
+                    b.HasKey("UserId", "MovieId");
 
                     b.ToTable("Favorite");
                 });
@@ -77,6 +72,9 @@ namespace FinaiProejct_200OK.Migrations
                     b.Property<string>("imdbPath")
                         .HasColumnType("nvarchar(max)");
 
+                    b.Property<string>("posterPath")
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("MovieId");
 
                     b.ToTable("IMDBData");
@@ -94,6 +92,9 @@ namespace FinaiProejct_200OK.Migrations
 
                     b.Property<int>("GenreId")
                         .HasColumnType("int");
+
+                    b.Property<string>("MovieDescription")
+                        .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("MovieTitle")
                         .HasColumnType("nvarchar(max)");
@@ -123,7 +124,7 @@ namespace FinaiProejct_200OK.Migrations
                     b.Property<string>("ReviewDesc")
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int?>("UserId")
+                    b.Property<int>("UserId")
                         .HasColumnType("int");
 
                     b.HasKey("ReviewId");
@@ -157,7 +158,9 @@ namespace FinaiProejct_200OK.Migrations
                 {
                     b.HasOne("FinaiProejct_200OK.Entities.User", null)
                         .WithMany("Favorites")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 
             modelBuilder.Entity("FinaiProejct_200OK.Entities.IMDBData", b =>
@@ -194,7 +197,9 @@ namespace FinaiProejct_200OK.Migrations
 
                     b.HasOne("FinaiProejct_200OK.Entities.User", null)
                         .WithMany("Reviews")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
                 });
 #pragma warning restore 612, 618
         }
