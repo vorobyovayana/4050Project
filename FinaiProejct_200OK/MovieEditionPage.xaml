@@ -12,14 +12,14 @@
         <TextBlock HorizontalAlignment="Left" Margin="50,128,0,0" TextWrapping="Wrap" Text="Director ID: " VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="50,158,0,0" TextWrapping="Wrap" Text="Genre ID: " VerticalAlignment="Top"/>
         <TextBox x:Name="EditionMovieIdTextBox" HorizontalAlignment="Left" Height="23" Margin="193,37,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="48" IsReadOnly="True"/>
-        <TextBlock HorizontalAlignment="Left" Margin="50,38,0,0" TextWrapping="Wrap" Text="Movie ID: " VerticalAlignment="Top"/>
+        <TextBlock x:Name="EditionMovieIdTextBlock" HorizontalAlignment="Left" Margin="50,38,0,0" TextWrapping="Wrap" Text="Movie ID: " VerticalAlignment="Top"/>
         <TextBox x:Name="EditionMovieTitleTextBox" HorizontalAlignment="Left" Height="23" Margin="193,67,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
-        <TextBox x:Name="EditionReleaseTextBox" HorizontalAlignment="Left" Height="23" Margin="193,97,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <TextBox x:Name="EditionDirectorTextBox" HorizontalAlignment="Left" Height="23" Margin="193,127,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <TextBox x:Name="EditionGenreTextBox" HorizontalAlignment="Left" Height="23" Margin="193,157,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <Button x:Name="EditionAddMovieButton" Content="Add" HorizontalAlignment="Left" Margin="295,197,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
         <Button x:Name="EditionEditMovieButton" Content="Edit" HorizontalAlignment="Left" Margin="295,197,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
         <TextBlock x:Name="EditionHintTextBox" HorizontalAlignment="Left" Height="23" Margin="10,193,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266" Foreground="Red"/>
+        <DatePicker x:Name="EditionReleaseDatePicker" HorizontalAlignment="Left" Margin="193,98,0,0" VerticalAlignment="Top" Width="123"/>
 
     </Grid>
 </Window>
