@@ -173,7 +173,7 @@ namespace FinaiProejct_200OK
                 DeleteMovieButton.Click += DeleteMovieButtonClick;
                 SearchTextBox.TextChanged += SearchTextInput;
                 DirectorListBox.SelectionChanged += filterByDirector;
-                GenreListBox.SelectionChanged += filterByGenre;
+                GenreListBox.SelectionChanged += filterByDirector;
                 LoginButton.Click += LoginButtonClick;
                 LogoutButton.Click += LogOutButtonClick;
                 CreateButton.Click += CreateButtonClick;
@@ -234,8 +234,8 @@ namespace FinaiProejct_200OK
             {
 
                 // List<String> selectedDirector = DirectorListBox.SelectedItems.Cast<ListViewItem>().Select(x => x.Content as string).ToList();
-                int selectedInd = DirectorListBox.SelectedIndex;
-
+                int selectedDirInd = DirectorListBox.SelectedIndex;
+                int selectedGenreInd = GenreListBox.SelectedIndex;
                 movies = ctx.Movie.ToList();
                 List<MovieTempForList> tempMovieList = new List<MovieTempForList>();
                 foreach (Movie m in movies)
@@ -248,14 +248,43 @@ namespace FinaiProejct_200OK
                     currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).FirstOrDefault().ToString();
                     tempMovieList.Add(currentMovie);
                 }
-
+                genres = ctx.Genre.ToList();
+                
 
                 directors = ctx.Director.ToList();
-                Director selectedDirector = directors[selectedInd];
-                var director = ctx.Director.Where(x => x.DirectorId == selectedDirector.DirectorId).First();
-                string directorName = director.DirectorName;
+               
 
-                tempMovieList = tempMovieList.Where(x => x.MovieDirector.Contains(directorName)).ToList();
+                if (selectedDirInd != -1 && selectedGenreInd != -1)
+                {
+                    Director selectedDirector = directors[selectedDirInd];
+                    var director = ctx.Director.Where(x => x.DirectorId == selectedDirector.DirectorId).First();
+                    string directorName = director.DirectorName;
+                    Genre selectedGenre = genres[selectedGenreInd];
+                    var genre = ctx.Genre.Where(x => x.GenreId == selectedGenre.GenreId).First();
+                    string genreName = genre.GenreName;
+                    tempMovieList = tempMovieList.Where(x => x.MovieGenres.Contains(genreName)&& x.MovieDirector.Contains(directorName)).ToList();
+
+                }
+
+
+                else if (selectedDirInd != -1 && selectedGenreInd== -1)
+                {
+                    Director selectedDirector = directors[selectedDirInd];
+                    var director = ctx.Director.Where(x => x.DirectorId == selectedDirector.DirectorId).First();
+                    string directorName = director.DirectorName;
+                    tempMovieList = tempMovieList.Where(x => x.MovieDirector.Contains(directorName)).ToList();
+
+                }
+                else if(selectedDirInd == null && selectedGenreInd != null)
+                {
+                    Genre selectedGenre = genres[selectedGenreInd];
+                    var genre = ctx.Genre.Where(x => x.GenreId == selectedGenre.GenreId).First();
+                    string genreName = genre.GenreName;
+                    tempMovieList = tempMovieList.Where(x => x.MovieGenres.Contains(genreName)).ToList();
+                }
+    
+
+                
                 MovieDataGrid.ItemsSource = tempMovieList;
             }
             
@@ -310,7 +339,7 @@ namespace FinaiProejct_200OK
 
         public void InitializeDirectorsListBox()
         {
-            DirectorListBox.SelectionMode = SelectionMode.Multiple;
+            //DirectorListBox.SelectionMode = SelectionMode.Multiple;
             DirectorListBox.Items.Clear();
             using (var ctx = new MovieContext())
             {
