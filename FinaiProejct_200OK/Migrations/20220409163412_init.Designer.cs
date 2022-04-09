@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace FinaiProejct_200OK.Migrations
 {
     [DbContext(typeof(MovieContext))]
-    [Migration("20220409063232_deleteMemberId")]
-    partial class deleteMemberId
+    [Migration("20220409163412_init")]
+    partial class init
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

@@ -203,21 +203,9 @@
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Migrations\20220407050003_init.cs" />
-    <Compile Include="Migrations\20220407050003_init.designer.cs">
-      <DependentUpon>20220407050003_init.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220408194005_Review.cs" />
-    <Compile Include="Migrations\20220408194005_Review.designer.cs">
-      <DependentUpon>20220408194005_Review.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220408225017_addCol.cs" />
-    <Compile Include="Migrations\20220408225017_addCol.designer.cs">
-      <DependentUpon>20220408225017_addCol.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\20220409063232_deleteMemberId.cs" />
-    <Compile Include="Migrations\20220409063232_deleteMemberId.designer.cs">
-      <DependentUpon>20220409063232_deleteMemberId.cs</DependentUpon>
+    <Compile Include="Migrations\20220409163412_init.cs" />
+    <Compile Include="Migrations\20220409163412_init.designer.cs">
+      <DependentUpon>20220409163412_init.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
     <Compile Include="MovieEditionPage.xaml.cs">

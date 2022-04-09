@@ -56,6 +56,7 @@ namespace FinaiProejct_200OK.Migrations
                     GenreId = table.Column<int>(nullable: false),
                     DirectorId = table.Column<int>(nullable: false),
                     MovieTitle = table.Column<string>(nullable: true),
+                    MovieDescription = table.Column<string>(nullable: true),
                     ReleaseDate = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>
@@ -79,19 +80,18 @@ namespace FinaiProejct_200OK.Migrations
                 name: "Favorite",
                 columns: table => new
                 {
-                    MemberId = table.Column<int>(nullable: false),
-                    MovieId = table.Column<int>(nullable: false),
-                    UserId = table.Column<int>(nullable: true)
+                    UserId = table.Column<int>(nullable: false),
+                    MovieId = table.Column<int>(nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_Favorite", x => new { x.MemberId, x.MovieId });
+                    table.PrimaryKey("PK_Favorite", x => new { x.UserId, x.MovieId });
                     table.ForeignKey(
                         name: "FK_Favorite_User_UserId",
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
 
             migrationBuilder.CreateTable(
@@ -99,7 +99,8 @@ namespace FinaiProejct_200OK.Migrations
                 columns: table => new
                 {
                     MovieId = table.Column<int>(nullable: false),
-                    imdbPath = table.Column<string>(nullable: true)
+                    imdbPath = table.Column<string>(nullable: true),
+                    posterPath = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -119,8 +120,8 @@ namespace FinaiProejct_200OK.Migrations
                     ReviewId = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     MovieId = table.Column<int>(nullable: false),
-                    ReviewDesc = table.Column<string>(nullable: true),
-                    UserId = table.Column<int>(nullable: true)
+                    UserId = table.Column<int>(nullable: false),
+                    ReviewDesc = table.Column<string>(nullable: true)
                 },
                 constraints: table =>
                 {
@@ -136,13 +137,8 @@ namespace FinaiProejct_200OK.Migrations
                         column: x => x.UserId,
                         principalTable: "User",
                         principalColumn: "UserId",
-                        onDelete: ReferentialAction.Restrict);
+                        onDelete: ReferentialAction.Cascade);
                 });
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Favorite_UserId",
-                table: "Favorite",
-                column: "UserId");
 
             migrationBuilder.CreateIndex(
                 name: "IX_Movie_DirectorId",

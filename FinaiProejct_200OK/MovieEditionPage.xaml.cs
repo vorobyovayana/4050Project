@@ -73,10 +73,7 @@ namespace FinaiProejct_200OK
                     var currentImdb = ctx.IMDBData.Where(i => i.MovieId == currentMovie.MovieId).First();
                     if (currentImdb == null)
                     {
-                        IMDBData imdb = new IMDBData();
-                        imdb.imdbPath = EditionImdbPathTextBox.Text;
-                        imdb.posterPath = EditionPosterPathTextBox.Text;
-                        imdb.MovieId = currentMovie.MovieId;
+                        IMDBData imdb = new IMDBData(currentMovie.MovieId, EditionImdbPathTextBox.Text, EditionPosterPathTextBox.Text);
                         ctx.IMDBData.Add(imdb);
                     }
                     else
@@ -127,10 +124,7 @@ namespace FinaiProejct_200OK
                         newMovie.ReleaseDate = EditionReleaseDatePicker.SelectedDate.Value;
                         ctx.Movie.Add(newMovie);
                         ctx.SaveChanges();
-                        IMDBData imdb = new IMDBData();
-                        imdb.imdbPath = EditionImdbPathTextBox.Text;
-                        imdb.posterPath = EditionPosterPathTextBox.Text;
-                        imdb.MovieId = newMovie.MovieId;
+                        IMDBData imdb = new IMDBData(newMovie.MovieId, EditionImdbPathTextBox.Text, EditionPosterPathTextBox.Text);
                         ctx.IMDBData.Add(imdb);
                         ctx.SaveChanges();
                         this.Close();
