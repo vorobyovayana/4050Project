@@ -46,11 +46,16 @@ namespace FinaiProejct_200OK
                     EditionReleaseDatePicker.SelectedDate = currentMovie.ReleaseDate;
                     EditionDirectorTextBox.Text = currentMovie.DirectorId.ToString();
                     EditionGenreTextBox.Text = currentMovie.GenreId.ToString();
+                    var imdb = ctx.IMDBData.Where(x => x.MovieId == currentMovie.MovieId).First();
+                    if (imdb != null)
+                    {
+                        EditionImdbPathTextBox.Text = imdb.imdbPath;
+                        EditionPosterPathTextBox.Text = imdb.posterPath;
+                    }
                 }
             } catch (Exception ex)
             {
-                MessageBox.Show("Something wrong when get the data from database! " + ex.Message);
-                
+                MessageBox.Show("Something wrong when get the data from database! " + ex.Message);                
             }
 
         }
@@ -60,21 +65,35 @@ namespace FinaiProejct_200OK
             try
             {
                 using (var ctx = new MovieContext())
-                {
-                    DateTime theDate;
+                {                    
                     var currentMovie = ctx.Movie.Where(x => x.MovieId.ToString() == EditionMovieIdTextBox.Text).First();
                     currentMovie.MovieTitle = EditionMovieTitleTextBox.Text;                    
                     currentMovie.DirectorId = Convert.ToInt32(EditionDirectorTextBox.Text);
-                    currentMovie.GenreId = Convert.ToInt32(EditionGenreTextBox.Text);                    
+                    currentMovie.GenreId = Convert.ToInt32(EditionGenreTextBox.Text);
+                    var currentImdb = ctx.IMDBData.Where(i => i.MovieId == currentMovie.MovieId).First();
+                    if (currentImdb == null)
+                    {
+                        IMDBData imdb = new IMDBData();
+                        imdb.imdbPath = EditionImdbPathTextBox.Text;
+                        imdb.posterPath = EditionPosterPathTextBox.Text;
+                        imdb.MovieId = currentMovie.MovieId;
+                        ctx.IMDBData.Add(imdb);
+                    }
+                    else
+                    {
+                        currentImdb.imdbPath = EditionImdbPathTextBox.Text;
+                        currentImdb.posterPath = EditionPosterPathTextBox.Text;
+                    }
                     if (EditionReleaseDatePicker.SelectedDate != null)
                     {
                         currentMovie.ReleaseDate = EditionReleaseDatePicker.SelectedDate.Value;
-                        ctx.SaveChanges();
+                        ctx.SaveChanges(); 
                         this.Close();
                     } else
                     {
                         EditionHintTextBox.Text = "Please select a date";
                     }
+                    
 
                     
                 }
@@ -98,7 +117,7 @@ namespace FinaiProejct_200OK
             {
                 using (var ctx = new MovieContext())
                 {
-                    DateTime myDate;
+                    
                     Movie newMovie = new Movie();
                     newMovie.MovieTitle = EditionMovieTitleTextBox.Text;
                     newMovie.GenreId = Convert.ToInt32(EditionGenreTextBox.Text);
@@ -107,6 +126,12 @@ namespace FinaiProejct_200OK
                     {
                         newMovie.ReleaseDate = EditionReleaseDatePicker.SelectedDate.Value;
                         ctx.Movie.Add(newMovie);
+                        ctx.SaveChanges();
+                        IMDBData imdb = new IMDBData();
+                        imdb.imdbPath = EditionImdbPathTextBox.Text;
+                        imdb.posterPath = EditionPosterPathTextBox.Text;
+                        imdb.MovieId = newMovie.MovieId;
+                        ctx.IMDBData.Add(imdb);
                         ctx.SaveChanges();
                         this.Close();
                     } else

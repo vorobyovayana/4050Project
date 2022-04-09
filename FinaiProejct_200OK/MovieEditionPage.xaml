@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:FinaiProejct_200OK"
         mc:Ignorable="d"
-        Title="MovieEditionPage" Height="261.2" Width="404.8">
+        Title="MovieEditionPage" Height="323.6" Width="510.4">
     <Grid Margin="0,0,3.6,5">
         <TextBlock HorizontalAlignment="Left" Margin="49,68,0,0" TextWrapping="Wrap" Text="Movie Title: " VerticalAlignment="Top"/>
         <TextBlock HorizontalAlignment="Left" Margin="49,98,0,0" TextWrapping="Wrap" Text="Movie Release Date: " VerticalAlignment="Top"/>
@@ -16,10 +16,14 @@
         <TextBox x:Name="EditionMovieTitleTextBox" HorizontalAlignment="Left" Height="23" Margin="193,67,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <TextBox x:Name="EditionDirectorTextBox" HorizontalAlignment="Left" Height="23" Margin="193,127,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
         <TextBox x:Name="EditionGenreTextBox" HorizontalAlignment="Left" Height="23" Margin="193,157,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="123"/>
-        <Button x:Name="EditionAddMovieButton" Content="Add" HorizontalAlignment="Left" Margin="295,197,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
-        <Button x:Name="EditionEditMovieButton" Content="Edit" HorizontalAlignment="Left" Margin="295,197,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
-        <TextBlock x:Name="EditionHintTextBox" HorizontalAlignment="Left" Height="23" Margin="10,193,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266" Foreground="Red"/>
+        <Button x:Name="EditionAddMovieButton" Content="Add" HorizontalAlignment="Left" Margin="401,252,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
+        <Button x:Name="EditionEditMovieButton" Content="Edit" HorizontalAlignment="Left" Margin="401,252,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
+        <TextBlock x:Name="EditionHintTextBox" HorizontalAlignment="Left" Height="23" Margin="10,267,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="266" Foreground="Red"/>
         <DatePicker x:Name="EditionReleaseDatePicker" HorizontalAlignment="Left" Margin="193,98,0,0" VerticalAlignment="Top" Width="123"/>
+        <TextBlock x:Name="ImdbPathTextBox" HorizontalAlignment="Left" Margin="49,191,0,0" TextWrapping="Wrap" Text="IMDB Path:" VerticalAlignment="Top"/>
+        <TextBlock HorizontalAlignment="Left" Margin="49,215,0,0" TextWrapping="Wrap" Text="Poster Path: " VerticalAlignment="Top"/>
+        <TextBox x:Name="EditionImdbPathTextBox" HorizontalAlignment="Left" Height="23" Margin="193,184,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245"/>
+        <TextBox x:Name="EditionPosterPathTextBox" HorizontalAlignment="Left" Height="23" Margin="193,212,0,0" TextWrapping="Wrap" Text="" VerticalAlignment="Top" Width="245"/>
 
     </Grid>
 </Window>
