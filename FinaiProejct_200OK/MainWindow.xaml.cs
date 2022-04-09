@@ -31,6 +31,7 @@ namespace FinaiProejct_200OK
         Login loginPage;
         Button subLogInButton;
         CreateAccount createPage;
+        Details detailsPage;
 
         DataGrid movieGrid;
         List<Director> directors = new List<Director>();
@@ -53,6 +54,7 @@ namespace FinaiProejct_200OK
             movies = new List<Movie>();
             myUser = null;
             loginPage = new Login();
+            detailsPage = new Details();
             subLogInButton = loginPage.SubLoginButton;
             createPage = new CreateAccount();
             ReadDataToDatabase();
@@ -67,7 +69,6 @@ namespace FinaiProejct_200OK
             movieGrid = MovieDataGrid;
 
             toggleEvent(true);
-
 
 
         }
@@ -85,13 +86,21 @@ namespace FinaiProejct_200OK
                 AddGenreBtn.Click += selectGenreFile;
                 AddDirectorBtn.Click += selectDirectorFile;
                 SearchTextBox.TextChanged += SearchInput;
+                DirectorListBox.SelectionChanged += filterByDirector;
+
 
             }
         }
 
         private void LoginButtonClick(Object o, EventArgs e)
         {
+            
             loginPage.Show();
+        }
+
+        private void MovieGridClick(Object o, EventArgs e)
+        {
+            detailsPage.Show();
         }
 
         private void selectDirectorFile(object o, EventArgs e)
@@ -310,6 +319,39 @@ namespace FinaiProejct_200OK
                 MovieDataGrid.ItemsSource = tempMovieList;
             }
         }
+        private void filterByDirector(Object o, EventArgs e)
+        {
+            using(var ctx= new MovieContext())
+            if (o.Equals(DirectorListBox))
+            {
+                    movies = ctx.Movie.ToList();
+      
+                    List<MovieTempForList> tempMovieListFull = new List<MovieTempForList>();
+                    foreach (Movie m in movies)
+                    {
+                        MovieTempForList currentMovie = new MovieTempForList();
+                        currentMovie.MovieId = m.MovieId;
+                        currentMovie.MovieTitle = m.MovieTitle;
+                        currentMovie.ReleaseDate = m.ReleaseDate.ToShortDateString();
+                        currentMovie.MovieDirector = ctx.Director.Where(x => x.DirectorId == m.DirectorId).First().ToString();
+                        currentMovie.MovieGenres = ctx.Genre.Where(x => x.GenreId == m.GenreId).First().ToString();
+                        tempMovieListFull.Add(currentMovie);
+                    }
+                    try
+                    {
+                        string selectedDirector = DirectorListBox.SelectedItems.Cast<ListViewItem>().Select(x => x.Content as string).First().ToString();
+                        //MessageBox.Show(DirectorListBox.SelectedItem);
+                        //tempMovieList = tempMovieListFull.Where(x => x.MovieDirector.Contains(input);
+                        MessageBox.Show(tempMovieList.Count.ToString());
+                    }
+                    catch(Exception ex)
+                    {
+                        MessageBox.Show(ex.Message);
+                    }
+                   
+                    
+                }
+        }
 
         private void SearchInput(Object o, EventArgs e)
         {
@@ -366,36 +408,36 @@ namespace FinaiProejct_200OK
             using (var ctx = new MovieContext())
             {
                 // First from director                
-                var count = ctx.Director.Count();
-                if (count < 5)
-                {
+                //var count = ctx.Director.Count();
+                //if (count < 5)
+                //{
                     List<Director> directorList = new List<Director>();
                     directorList = DirectorParser.ParseDirector(fs.ReadFile(@"..\\..\\Data\\directors.csv"));
                     foreach (Director director in directorList)
                     {
                         ctx.Director.Add(director);
                     }
-                }
+                //}
 
                 ctx.SaveChanges();
                 // Second is Genre                
-                count = ctx.Genre.Count();
-                if (count < 5)
-                {
+                //count = ctx.Genre.Count();
+                //if (count < 5)
+                //{
                     List<Genre> genreList = new List<Genre>();
                     genreList = GenreParser.ParseGenre(fs.ReadFile(@"..\\..\\Data\\genres.csv"));
                     foreach (Genre genre in genreList)
                     {
                         ctx.Genre.Add(genre);
                     }
-                }
+                //}
 
                 ctx.SaveChanges();
 
                 // Then add into Movie
-                count = ctx.Movie.Count();
-                if (count < 5)
-                {
+                //count = ctx.Movie.Count();
+                //if (count < 5)
+                //{
                     List<Movie> movieList = new List<Movie>();
                     movieList = MovieParser.ParseMovie(fs.ReadFile(@"..\\..\\Data\\movies.csv"));
                     for (int i = 0; i < 5; i++)
@@ -408,7 +450,7 @@ namespace FinaiProejct_200OK
                         ctx.Movie.Add(movieList[i]);
 
                     }
-                }
+                //}
 
                 ctx.SaveChanges();
             }
