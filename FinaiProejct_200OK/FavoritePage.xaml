@@ -15,7 +15,7 @@
         </Grid.ColumnDefinitions>
         <TextBlock x:Name="Title"  HorizontalAlignment="Left" Margin="42,10,0,0" TextWrapping="Wrap" Text="My Favorites List" VerticalAlignment="Top" Height="39" Width="170" Grid.ColumnSpan="2"/>
         <WrapPanel x:Name="wrapPanel" HorizontalAlignment="Left" Height="386" Margin="42,49,0,0" VerticalAlignment="Top" Width="643" Grid.ColumnSpan="2"/>
-        <Button x:Name="CloseBtn" Content="Back" HorizontalAlignment="Left" Margin="638.638,355,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
+        <Button x:Name="CloseBtn" Content="Back" HorizontalAlignment="Left" Margin="594.8,416,0,0" VerticalAlignment="Top" Width="75" Grid.Column="1"/>
 
     </Grid>
 </Page>

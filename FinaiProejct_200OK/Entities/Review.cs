@@ -14,6 +14,9 @@ namespace FinaiProejct_200OK.Entities
         public int MovieId { get; set; }
         public int UserId { get; set; }
         public string ReviewDesc { get; set; }
+        public User user { get; set; }
+        public Movie movie { get; set; }
+
 
         public Review( int movieId,int userId, string reviewDesc)
         {

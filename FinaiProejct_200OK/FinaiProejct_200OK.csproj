@@ -207,6 +207,10 @@
     <Compile Include="Migrations\20220409163412_init.designer.cs">
       <DependentUpon>20220409163412_init.cs</DependentUpon>
     </Compile>
+    <Compile Include="Migrations\20220410044931_manytomany.cs" />
+    <Compile Include="Migrations\20220410044931_manytomany.designer.cs">
+      <DependentUpon>20220410044931_manytomany.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\MovieContextModelSnapshot.cs" />
     <Compile Include="MovieEditionPage.xaml.cs">
       <DependentUpon>MovieEditionPage.xaml</DependentUpon>

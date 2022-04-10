@@ -436,6 +436,7 @@ namespace FinaiProejct_200OK
 
                     Movie deleteMovie = movies[MovieDataGrid.SelectedIndex];
                     ctx.Movie.Remove(ctx.Movie.Where(x => x.MovieId == deleteMovie.MovieId).First());
+                    ctx.Favorite.Remove(ctx.Favorite.Where(x => x.MovieId == deleteMovie.MovieId).First());
                     ctx.SaveChanges();
                 }
 

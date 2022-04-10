@@ -82,7 +82,7 @@ namespace FinaiProejct_200OK
                 var favorite = ctx.Favorite.Where(x => x.MovieId == movie.MovieId && x.UserId==user.UserId).FirstOrDefault();
                 if (favorite != null)
                 {
-                    FavoriteBtn.Content = "Delete for my favorite list";
+                    FavoriteBtn.Content = "Delete form my favorite list";
                     return true;
                 }
                 else {

@@ -24,6 +24,6 @@
         <Button Name="FavoritesButton" Content="My Favorites List" HorizontalAlignment="Left" Margin="68,76,0,0" VerticalAlignment="Top" Width="75"/>
         <Button Name="CreateButton" HorizontalAlignment="Left" Content="Create Account" Margin="564,32,0,0" VerticalAlignment="Top" Width="87" />
         <Button Name="LoginButton" Content="LogIn" HorizontalAlignment="Left" Margin="677,32,0,0" VerticalAlignment="Top" Width="75"/>
-        <Button Name="LogoutButton" Content="LogOut" HorizontalAlignment="Left" Margin="656,52,0,0" VerticalAlignment="Top" Width="75" Visibility="Hidden"/>
+        <Button Name="LogoutButton" Content="LogOut" HorizontalAlignment="Left" Margin="564,62,0,0" VerticalAlignment="Top" Width="75"  Visibility="Hidden"  />
     </Grid>
 </Page>
