@@ -27,7 +27,7 @@ namespace FinaiProejct_200OK
     public partial class MainWindow : Window
     {
 
-        MainWindow mainWindow;
+          MainWindow mainWindow;
         string userName = string.Empty;
         public MainWindow()
         {
